@@ -23,7 +23,7 @@ namespace TestGame.Managers
         }
         public void Draw(Game1 g)
         {
-            gameObjects.Sort((o1, o2) => o2.Y.CompareTo(o1.Y));
+            //gameObjects.Sort((o1, o2) => o2.Y.CompareTo(o1.Y));
             foreach (GameObject obj in gameObjects)
             {
                 if(obj.rendered && obj.visiable)

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using TestGame.Containers.Items;
 using TestGame.Graphics;
+using TestGame.Huds;
 using TestGame.Managers;
 using TestGame.Objects;
 using TestGame.Objects.Entities;
@@ -23,8 +24,8 @@ namespace TestGame.Pages
         public Player player = new Player(128, 198);
         public BuildHandler buildHandler;
         public Camera cam = new Camera(new Vector2(0, 0));
-        private Texture2D _spritZombie;
         public SceneManager sceneManager { get; } = new SceneManager();
+        public HudManager hudManager { get; } = new HudManager();
 
         public Player GetPlayer() { return player; }
         public PageGame() : base(PageID.game) { }
@@ -35,10 +36,7 @@ namespace TestGame.Pages
 
             //init scenes
             sceneManager.Add(new World1(g), g);
-
             sceneManager.Set(0);
-
-            _spritZombie = g.Content.Load<Texture2D>("monster");
 
 
             objectManager.Add(new Block(128, 128), g);
@@ -53,6 +51,8 @@ namespace TestGame.Pages
             objectManager.Add(player, g);
 
             buildHandler = new BuildHandler(objectManager, sceneManager, g);
+
+            hudManager.Add(new InventoryHud(player));
         }
 
         public override void Update(GameTime gt, Game1 g)
@@ -69,6 +69,7 @@ namespace TestGame.Pages
             
             objectManager.Draw(g);
             sceneManager.Draw(g);
+            hudManager.Draw(g);
 
             Drawing._spriteBatch.End();
 

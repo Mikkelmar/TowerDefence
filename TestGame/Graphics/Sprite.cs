@@ -34,8 +34,28 @@ namespace TestGame.Graphics
             this.rectangle = rectangle;
             this.p = p;
         }
-
-        public void Draw(SpriteBatch spritebatch, Vector2 pos, float layerDepth = 0, Rectangle? bounds = null, int scale = 1)
+        public void Draw(Vector2 pos, float layerDepth = 0.00001f)
+        {
+            Draw(Drawing._spriteBatch, pos, layerDepth);
+        }
+        public void Draw(Rectangle bounds, float layerDepth = 0.00001f)
+        {
+            Draw(Drawing._spriteBatch, bounds, layerDepth);
+        }
+        public void Draw(SpriteBatch spritebatch, Rectangle bounds, float layerDepth = 0.00001f, int scale = 1)
+        {
+            spritebatch.Draw(
+                    Texture,
+                    (Rectangle)bounds,
+                    Rectangle,
+                    Color.White,
+                    0.0f,
+                    Vector2.Zero,
+                    SpriteEffects.None,
+                    layerDepth
+               );
+        }
+            public void Draw(SpriteBatch spritebatch, Vector2 pos, float layerDepth = 0.00001f, Rectangle? bounds = null, int scale = 1)
         {
             //Todo setup this prettier
             if (bounds != null)

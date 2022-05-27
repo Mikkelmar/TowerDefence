@@ -20,7 +20,6 @@ namespace TestGame.Managers
 
         //props
         public int id;
-        public string text, tag;
         public bool rendered, visiable;
         public bool collision, solid;
 

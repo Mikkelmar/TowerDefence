@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TestGame.Graphics;
 
 namespace TestGame
 {
@@ -36,6 +37,10 @@ namespace TestGame
             delta = (float)gt.ElapsedGameTime.TotalSeconds;
             fps = (float)(1/delta);
             
+        }
+        public static void DrawText(string text, int x, int y, float layerDepth=0.0001f)
+        {
+            _spriteBatch.DrawString(Textures.font, text, new Vector2(x, y), Color.White, 0.0f, new Vector2(0, 0), 1f, SpriteEffects.None, layerDepth);
         }
         public static void FillRect(Rectangle bounds, Color col, float depth, Game1 g) 
         { 

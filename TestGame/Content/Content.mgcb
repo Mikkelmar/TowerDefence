@@ -26,6 +26,13 @@
 /processorParam:TextureFormat=Color
 /build:!CL_DEMO.png
 
+#begin defaultFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:defaultFont.spritefont
+
 #begin farm_tile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -37,6 +44,25 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:farm_tile.png
+
+#begin fonts/boldGame.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/boldGame.spritefont
+
+#begin invenbar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:invenbar.png
 
 #begin Island.tmx
 /copy:Island.tmx

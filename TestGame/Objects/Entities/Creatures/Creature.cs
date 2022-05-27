@@ -32,7 +32,7 @@ namespace TestGame.Objects.Entities.Creatures
         }
         public override void Draw(Game1 g)
         {
-            Drawing.FillRect(new Rectangle((int)this.X, (int)this.Y - 30, (int)this.Width, 20), Color.Aqua, 0.9f, g);
+            //Drawing.FillRect(new Rectangle((int)this.X, (int)this.Y - 30, (int)this.Width, 20), Color.Aqua, 0.9f, g);
             base.Draw(g);
         }
         protected void MoveTowards(GameObject obj, Game1 g, float moveSpeed)

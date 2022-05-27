@@ -20,7 +20,7 @@ namespace TestGame.Objects
         }
         public override void Draw(Game1 g)
         {
-            Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);
+            //Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);
             sprite.Draw(Drawing._spriteBatch, this.position, depth, new Rectangle((int)this.X, (int)this.Y, (int)Width, (int)Height));
         }
     }
