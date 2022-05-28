@@ -1,15 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using MonoGame.Extended.ViewportAdapters;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TestGame.Managers
 {
     public class Camera
     {
-        private OrthographicCamera cam;
+        //private OrthographicCamera cam;
         public Vector2 position;
         public Matrix transform { get; private set; }
         public float delay { get; set; } = 3.0f;

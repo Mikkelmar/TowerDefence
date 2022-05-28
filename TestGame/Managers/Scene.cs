@@ -64,7 +64,7 @@ namespace TestGame.Managers
                                 (int)(y* game_SIZE), 
                                 (int)(tilesetWidth* game_SIZE), 
                                 (int)(tilesetHeight* game_SIZE)), 
-                            tilsetRectangle, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.0001f - (i * 0.00001f));
+                            tilsetRectangle, Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 0.5f - (i * 0.01f));
                     }
                 }
             }

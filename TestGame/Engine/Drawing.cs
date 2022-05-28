@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TestGame.Graphics;
 
 namespace TestGame
@@ -10,6 +7,8 @@ namespace TestGame
     public static class Drawing
     {
         public static int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
+
+
         public static string TITLE = "Island RPG";
         public static bool vsync = false;
 

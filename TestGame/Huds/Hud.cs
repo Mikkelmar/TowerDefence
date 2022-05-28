@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,8 +9,24 @@ namespace TestGame.Huds
     {
 
         public float X, Y;
-        public float depth = 0.00000000001f;
+        protected int Width, Height;
+        public float depth = 0.00000001f;
         public bool rendered = true, visiable = true;
+        protected bool relative = true;
+        protected Rectangle GetRectangle(Game1 g)
+        {
+            float cx = 0, cy = 0;
+            if (relative)
+            {
+                cx = g.pageGame.cam.position.X;
+                cy = g.pageGame.cam.position.Y;
+            }
+            return new Rectangle(
+                (int)(this.X + cx),
+                (int)(this.Y + cy),
+                Width,
+                Height);
+        }
         public abstract void Draw(Game1 g);
         
             //Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);

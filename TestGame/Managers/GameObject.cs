@@ -11,7 +11,7 @@ namespace TestGame.Managers
         public float X, Y;
         public float xSpeed, ySpeed;
         public float Width, Height;
-        public float depth = 0.05f;
+        public float depth = 0.005f;
 
         public Vector2 position { get { return new Vector2(X, Y); } set { X = value.X; Y = value.Y; } }
         public Vector2 speed { get { return new Vector2(xSpeed, ySpeed); } set { xSpeed = value.X; ySpeed = value.Y; } }
@@ -34,7 +34,6 @@ namespace TestGame.Managers
             this.Y = y;
             this.Width = w;
             this.Height = h;
-            this.depth = 0;
             bounds = new Rectangle(x, y, w, h);
             hitbox = new Rectangle(0, 0, w, h);
 
@@ -62,7 +61,7 @@ namespace TestGame.Managers
         
         // gets
         public int GetID() { return id; }
-        public float DistanceTo(Vector2 pos) { return Vector2.Distance(position, pos); }
+        public float DistanceTo(Vector2 pos) { return Vector2.Distance(GetPosCenter(), pos); }
         public Vector2 GetPosCenter() { return new Vector2(X + (Width / 2), Y + (Height / 2)); }
         public Rectangle GetHitbox() { return new Rectangle((int)X + hitbox.X, (int)Y + hitbox.Y, hitbox.Width, hitbox.Height); }
         public bool Intersect(GameObject obj)
@@ -72,6 +71,11 @@ namespace TestGame.Managers
         public bool Intersect(Rectangle rect)
         {
             return rect.Intersects(GetHitbox());
+        }
+
+        public bool Intersect(Vector2 point)
+        {
+            return GetHitbox().Contains(point.ToPoint());
         }
     }
 }

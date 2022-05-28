@@ -15,6 +15,9 @@ namespace TestGame.Objects
         {
             this.sprite = sprite;
         }
+        public Entity(int x, int y, int id) : base(x, y, 32, 32, id)
+        {
+        }
         public override void Draw(Game1 g)
         {
             //Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);

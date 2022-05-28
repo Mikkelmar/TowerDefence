@@ -1,13 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using TestGame.Containers;
-using TestGame.Containers.Items;
 using TestGame.Graphics;
-using TestGame.Managers;
 using TestGame.Objects.Entities.Structures;
 
 namespace TestGame.Objects
@@ -18,6 +12,7 @@ namespace TestGame.Objects
         //input
         KeyboardState kb;
         public float walkSpeed = 370f;
+        public bool canMove = true;
         public Player(int x, int y) : base(x, y, 28*3, 28*3, ObjectsID.player, Textures.player) 
         {
             this.inventory = new ItemContainer();
@@ -43,10 +38,11 @@ namespace TestGame.Objects
             InteractInput(g);
 
             var mouseState = Mouse.GetState();
-
-            //move
-            this.Move(new Vector2(X + xSpeed, Y + ySpeed), g);
-
+            if (canMove)
+            {
+                //move
+                this.Move(new Vector2(X + xSpeed, Y + ySpeed), g);
+            }
 
         }
         public override void Draw(Game1 g)
@@ -60,7 +56,7 @@ namespace TestGame.Objects
             if(kb.IsKeyDown(Keys.E)){
                 //g.pageGame.sceneManager.GetScene().GetTile((int)(X/3), (int)(Y/3));
   
-                g.pageGame.buildHandler.Build(new Tree(3 * (int)(X / 3), 3 * (int)(Y / 3)));
+                //g.pageGame.buildHandler.Build(new Tree(3 * (int)(X / 3), 3 * (int)(Y / 3)));
             }
         }
         private void MovmentInput(Game1 g)

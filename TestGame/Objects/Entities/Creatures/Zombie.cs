@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using TestGame.Containers.Items;
 using TestGame.Graphics;
+using TestGame.Managers;
 
 namespace TestGame.Objects.Entities.Creatures
 {
-    public class Zombie : Hostile
+    public class Zombie : Hostile, Clickable
     {
         public Zombie(int x, int y, int w, int h) : base(x, y, w, h, 3, Textures.monster)
         {
@@ -13,17 +16,30 @@ namespace TestGame.Objects.Entities.Creatures
             this.Health = 20;
             this.Name = "Zombie";
         }
+
+        public void Clicked(float x, float y, Game1 g)
+        {
+            //Debug.WriteLine("we cliked" + x + g.pageGame.cam.position.X +"  "+ y + g.pageGame.cam.position.Y);
+            if(this.Intersect(new Microsoft.Xna.Framework.Vector2(x, y)))
+            {
+                Die(g);
+            }
+        }
+
         public override void Destroy(Game1 g)
         {
+            g.pageGame.mouseManager.Remove(this);
         }
 
         public override void Die(Game1 g)
         {
             g.pageManager.GetPage().objectManager.Remove(this, g);
+            g.pageManager.GetPage().objectManager.Add(new ItemEntity((int)this.X, (int)this.Y, new Apple()), g);
         }
 
         public override void Init(Game1 g)
         {
+            g.pageGame.mouseManager.Add(this, true);
         }
     }
 }

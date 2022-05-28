@@ -8,30 +8,33 @@ namespace TestGame.Containers.Items
 {
     public class Wood : Item
     {
-        public Wood() 
+        public Wood(int ammount=1) 
             : base(
                 new Sprite(Textures.spriteSheet_1, new Rectangle(33 * 16, 16*5, 16, 16)), 
-                "Wood")
+                "Wood",
+                ammount)
         {
             
         }
     }
     public class Stone : Item
     {
-        public Stone()
+        public Stone(int ammount = 1)
             : base(
                 new Sprite(Textures.spriteSheet_1, new Rectangle(36 * 16, 16 * 6, 16, 16)),
-                "Stone")
+                "Stone",
+                ammount)
         {
 
         }
     }
     public class Apple : Item
     {
-        public Apple()
+        public Apple(int ammount = 1)
             : base(
                 new Sprite(Textures.spriteSheet_1, new Rectangle(19 * 16, 16 * 1, 16 * 1, 16 * 1)),
-                "Apple")
+                "Apple",
+                ammount)
         {
 
         }

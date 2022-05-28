@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using System;
@@ -11,10 +12,10 @@ using TestGame.Huds;
 using TestGame.Managers;
 using TestGame.Objects;
 using TestGame.Objects.Entities;
+using TestGame.Objects.Entities.Buildings;
 using TestGame.Objects.Entities.Creatures;
 using TestGame.Objects.Entities.Structures;
 using TestGame.Scenes;
-using TiledSharp;
 
 namespace TestGame.Pages
 {
@@ -26,6 +27,8 @@ namespace TestGame.Pages
         public Camera cam = new Camera(new Vector2(0, 0));
         public SceneManager sceneManager { get; } = new SceneManager();
         public HudManager hudManager { get; } = new HudManager();
+        public MouseManager mouseManager { get; } = new MouseManager();
+        public KeyBoardManager keyBoardManager { get; } = new KeyBoardManager();
 
         public Player GetPlayer() { return player; }
         public PageGame() : base(PageID.game) { }
@@ -38,12 +41,15 @@ namespace TestGame.Pages
             sceneManager.Add(new World1(g), g);
             sceneManager.Set(0);
 
-
+            //init craftin
+            CraftingRecepies.Init(g);
+            //init objects
             objectManager.Add(new Block(128, 128), g);
             objectManager.Add(new Tree(428, 128), g);
             objectManager.Add(new ItemEntity(528, 128, new Wood()), g);
             objectManager.Add(new ItemEntity(568, 128, new Stone()), g);
             objectManager.Add(new ItemEntity(608, 128, new Apple()), g);
+            objectManager.Add(new CraftingTable(608, 628), g);
             Wood wood1 = new Wood();
             wood1.addAmmount(5);
             objectManager.Add(new ItemEntity(828, 128, wood1), g);
@@ -52,11 +58,13 @@ namespace TestGame.Pages
 
             buildHandler = new BuildHandler(objectManager, sceneManager, g);
 
-            hudManager.Add(new InventoryHud(player));
+            hudManager.Add(new PlayerHud(player));
         }
 
         public override void Update(GameTime gt, Game1 g)
         {
+            mouseManager.Update(gt, g);
+            keyBoardManager.Update(gt, g);
             objectManager.Update(gt, g);
             //sceneManager.Update(gt, g);
             cam.Update(player.GetPosCenter(), g);

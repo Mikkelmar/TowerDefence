@@ -9,7 +9,11 @@ namespace TestGame.Containers
     {
         private List<Item> items = new List<Item>();
         protected int Capacity = -1; //default for infinit capacity
-
+        public ItemContainer(){}
+        public ItemContainer(List<Item> items)
+        {
+            Add(items);
+        }
         public override string ToString()
         {
             String content = "Contains: ["+ System.Environment.NewLine;
@@ -35,7 +39,11 @@ namespace TestGame.Containers
 
         public void Add(ItemContainer ic)
         {
-            foreach(Item i in ic.GetItems())
+            Add(ic.GetItems());
+        }
+        public void Add(List<Item> items)
+        {
+            foreach (Item i in items)
             {
                 Add(i);
             }

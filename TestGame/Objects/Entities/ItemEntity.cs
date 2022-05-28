@@ -23,11 +23,11 @@ namespace TestGame.Objects.Entities
             float dist = player.DistanceTo(this.GetPosCenter());
             
             
-            if (dist <= 180)
+            if (dist <= 150)
             {
                 float _speed = (float)((this.Speed * Drawing.delta)*10/Math.Pow(dist/100, 2));
                 this.MoveTowards(player, g, _speed);
-                if (dist <= 80)
+                if (dist <= 50)
                 {
                     player.inventory.Add(this.item);
                     g.pageGame.objectManager.Remove(this, g);
