@@ -42,5 +42,23 @@ namespace TestGame.Containers.Items
         {
             Draw((int)x, (int)y, size, depth, showAmmount);
         }
+        protected static Rectangle getSpriteRect(int x, int y, int with = 1, int height = 1)
+        {
+            return new Rectangle(x * 16, 16 * y, 16 * with, 16 * height);
+        }
+        public virtual Item Clone()
+        {
+            return (Item)Activator.CreateInstance(this.GetType(), this.Ammount);
+        }
+
+        //TODO: Bør bruke noe annet en navn, helst lage et ID system eller noe
+        public bool Equals(Item item)
+        {
+            if(item == null || this == null)
+            {
+                return false;
+            }
+            return item.Name.Equals(this.Name);
+        }
     }
 }

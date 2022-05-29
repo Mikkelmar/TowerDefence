@@ -6,6 +6,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TestGame.Containers;
 using TestGame.Containers.Items;
 using TestGame.Graphics;
 using TestGame.Huds;
@@ -32,7 +33,7 @@ namespace TestGame.Pages
 
         public Player GetPlayer() { return player; }
         public PageGame() : base(PageID.game) { }
-        
+
 
         public override void Init(Game1 g)
         {
@@ -50,6 +51,11 @@ namespace TestGame.Pages
             objectManager.Add(new ItemEntity(568, 128, new Stone()), g);
             objectManager.Add(new ItemEntity(608, 128, new Apple()), g);
             objectManager.Add(new CraftingTable(608, 628), g);
+            objectManager.Add(new Chest(608, 798), g);
+            Chest largeChest = new Chest(698, 798, 16, 4, 4);
+            ItemContainer ic = new StackContainer(new List<Item>{new Wood(40), new Stone(8)});
+            largeChest.container.Add(ic);
+            objectManager.Add(largeChest, g);
             Wood wood1 = new Wood();
             wood1.addAmmount(5);
             objectManager.Add(new ItemEntity(828, 128, wood1), g);
@@ -59,6 +65,9 @@ namespace TestGame.Pages
             buildHandler = new BuildHandler(objectManager, sceneManager, g);
 
             hudManager.Add(new PlayerHud(player));
+
+            player.inventory.AddToSlot(new Bow(), 6);
+            player.inventory.AddToSlot(new Bow(), 12);
         }
 
         public override void Update(GameTime gt, Game1 g)

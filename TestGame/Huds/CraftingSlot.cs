@@ -44,5 +44,9 @@ namespace TestGame.Huds
             slotPos.X += 64;
             recepie.creates.Draw(slotPos, 64, depth * 0.1f);
         }
+        public override void Destroy(Game1 g)
+        {
+            g.pageGame.mouseManager.Remove(this);
+        }
     }
 }

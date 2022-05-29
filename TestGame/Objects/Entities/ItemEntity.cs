@@ -20,19 +20,23 @@ namespace TestGame.Objects.Entities
         public override void Update(GameTime gt, Game1 g)
         {
             Player player = g.pageGame.GetPlayer();
-            float dist = player.DistanceTo(this.GetPosCenter());
-            
-            
-            if (dist <= 150)
-            {
-                float _speed = (float)((this.Speed * Drawing.delta)*10/Math.Pow(dist/100, 2));
-                this.MoveTowards(player, g, _speed);
-                if (dist <= 50)
+
+            if (player.inventory.CanAdd(this.item)){
+                float dist = player.DistanceTo(this.GetPosCenter());
+
+
+                if (dist <= 150)
                 {
-                    player.inventory.Add(this.item);
-                    g.pageGame.objectManager.Remove(this, g);
+                    float _speed = (float)((this.Speed * Drawing.delta) * 10 / Math.Pow(dist / 100, 2));
+                    this.MoveTowards(player, g, _speed);
+                    if (dist <= 50)
+                    {
+                        player.inventory.Add(this.item);
+                        g.pageGame.objectManager.Remove(this, g);
+                    }
                 }
-             }
+            }
+            
 
         }
         protected void MoveTowards(GameObject obj, Game1 g, float moveSpeed)

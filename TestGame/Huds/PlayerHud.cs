@@ -32,10 +32,16 @@ namespace TestGame.Huds
                );
 
             Vector2 itemPos = new Vector2(this.X + g.pageGame.cam.position.X + 12, this.Y + g.pageGame.cam.position.Y + 4);
-            foreach (Item i in player.inventory.GetItems())
+            for (int i = 0; i < 8; i++) //8 for antall slots i hotbaren(bør ikke hardkodes)
             {
-                i.Draw(itemPos, 64, (depth * 0.5f));
+                Item item = player.inventory.GetItemAtSlot(i);
+                if (item != null)
+                {
+                    item.Draw(itemPos, 64, (depth * 0.5f));
+                    
+                }
                 itemPos.X += 64;
+
             }
         }
     }

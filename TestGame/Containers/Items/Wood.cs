@@ -32,8 +32,41 @@ namespace TestGame.Containers.Items
     {
         public Apple(int ammount = 1)
             : base(
-                new Sprite(Textures.spriteSheet_1, new Rectangle(19 * 16, 16 * 1, 16 * 1, 16 * 1)),
+                new Sprite(Textures.spriteSheet_1, getSpriteRect(19, 1)),
                 "Apple",
+                ammount)
+        {
+
+        }
+    }
+    public class Bow : Item
+    {
+        public Bow(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(0, 2)),
+                "Bow",
+                ammount)
+        {
+
+        }
+    }
+    public class IronHelmet : Item
+    {
+        public IronHelmet(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(4, 5)),
+                "Iron Helmet",
+                ammount)
+        {
+
+        }
+    }
+    public class Iron : Item
+    {
+        public Iron(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(12, 6)),
+                "Iron",
                 ammount)
         {
 

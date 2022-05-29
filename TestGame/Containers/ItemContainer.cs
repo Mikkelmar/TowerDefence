@@ -5,10 +5,8 @@ using TestGame.Containers.Items;
 
 namespace TestGame.Containers
 {
-    public class ItemContainer
+    public abstract class ItemContainer
     {
-        private List<Item> items = new List<Item>();
-        protected int Capacity = -1; //default for infinit capacity
         public ItemContainer(){}
         public ItemContainer(List<Item> items)
         {
@@ -23,66 +21,25 @@ namespace TestGame.Containers
             }
             return content + "]";
         }
-        public void Add(Item item, int ammount) {
-            item.addAmmount(ammount);
-            Add(item);
-        }
-        public virtual void Add(Item item) {
-            if (Contain(item)){
-                getItem(item).addAmmount(item.Ammount);
+        public abstract bool CanAdd(Item item);
+        public abstract void Add(Item item, int ammount);
+        public abstract void Add(Item item);
+        public abstract void Add(ItemContainer ic);
+        public abstract void Add(List<Item> items);
+        public abstract void RemoveAmmount(Item item, int ammount);
+        public abstract Item getItem(Item item);
+        public abstract List<Item> GetItems();
+        public void Take(Item item, int ammount)
+        {
+            if(Contain(item, ammount))
+            {
+                RemoveAmmount(item, ammount);
             }
             else
             {
-                items.Add(item);
-            }
-        }
-
-        public void Add(ItemContainer ic)
-        {
-            Add(ic.GetItems());
-        }
-        public void Add(List<Item> items)
-        {
-            foreach (Item i in items)
-            {
-                Add(i);
-            }
-        }
-        public Item getItem(Item item) { return getItem(item.Name); }
-        public Item getItem(String name)
-        {
-            foreach(Item i in items)
-            {
-                if (i.Name.Equals(name))
-                {
-                    return i;
-                }
-            }
-            return null;
-        }
-        public List<Item> GetItems()
-        {
-            return new List<Item>(items);
-        }
-        public void Take(ItemContainer ic)
-        {
-            foreach(Item i in ic.GetItems())
-            {
-                Take(i, i.Ammount);
-            }
-        }
-        public void Take(Item item, int ammount)
-        {
-            if(!Contain(item, ammount))
-            {
                 throw new Exception("Don't have enough to take!");
             }
-            Item i = getItem(item);
-            i.addAmmount(-ammount);
-            if (i.Ammount <= 0)
-            {
-                Remove(i);
-            }
+            
         }
         public bool Contain(ItemContainer ic)
         {
@@ -94,11 +51,18 @@ namespace TestGame.Containers
             }
             return true;
         }
-        public bool Contain(Item item) { return getItem(item) != null; }
+        public virtual void Take(ItemContainer ic)
+        {
+            foreach (Item i in ic.GetItems())
+            {
+                Take(i, i.Ammount);
+            }
+        }
+        public virtual bool Contain(Item item) { return getItem(item) != null; }
         public bool Contain(Item item, int ammount) {
             return Contain(item) && getItem(item).Ammount >= ammount;
         }
-        public void Remove(Item item) { items.Remove(item); }
-        public void Clear() { items.Clear(); }
+        public abstract void Remove(Item item);
+        public abstract void Clear();
     }
 }

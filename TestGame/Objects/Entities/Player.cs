@@ -1,21 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 using TestGame.Containers;
 using TestGame.Graphics;
+using TestGame.Huds.ActiveHuds;
+using TestGame.Managers;
 using TestGame.Objects.Entities.Structures;
 
 namespace TestGame.Objects
 {
     public class Player : Entity
     {
-        public ItemContainer inventory;
+        public SlotContainer inventory;
         //input
         KeyboardState kb;
         public float walkSpeed = 370f;
         public bool canMove = true;
+        private bool down = false;
         public Player(int x, int y) : base(x, y, 28*3, 28*3, ObjectsID.player, Textures.player) 
         {
-            this.inventory = new ItemContainer();
             collision = true;
             this.hitbox = new Rectangle((int)Width/4, (int)(Height/3.5), (int)Width / 2, (int)(Height - Height / 3.5));
         }
@@ -26,7 +29,7 @@ namespace TestGame.Objects
 
         public override void Init(Game1 g)
         {
-            this.inventory = new ItemContainer();
+            this.inventory = new SlotContainer(24);
             //inventory.Add(new Wood());
         }
 
@@ -54,11 +57,31 @@ namespace TestGame.Objects
         private void InteractInput(Game1 g)
         {
             if(kb.IsKeyDown(Keys.E)){
-                //g.pageGame.sceneManager.GetScene().GetTile((int)(X/3), (int)(Y/3));
-  
-                //g.pageGame.buildHandler.Build(new Tree(3 * (int)(X / 3), 3 * (int)(Y / 3)));
+                if(down == false)
+                {
+                    down = true;
+                    HudManager hm = g.pageGame.hudManager;
+                    if (hm.activeUI == null)
+                    {
+                        hm.Open(new InventoryUI(g), g);
+                    }
+                    else
+                    {
+                        hm.Close(g);
+                    }
+                    //g.pageGame.hudManager
+                }
             }
-        }
+            else
+            {
+                down = false;
+            }
+            if (kb.IsKeyDown(Keys.R))
+            {
+                Debug.WriteLine(g.pageGame.mouseManager.mouseRightClickLisners.Count);
+            }
+
+            }
         private void MovmentInput(Game1 g)
         {
             float _speed = walkSpeed * Drawing.delta;

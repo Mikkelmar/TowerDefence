@@ -27,6 +27,10 @@ namespace TestGame.Huds
                 Width,
                 Height);
         }
+        public virtual void Destroy(Game1 g)
+        {
+
+        }
         public abstract void Draw(Game1 g);
         
             //Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);

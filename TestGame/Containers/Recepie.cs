@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using TestGame.Containers.Items;
@@ -24,7 +25,8 @@ namespace TestGame.Containers
         public void Create(ItemContainer inevntory)
         {
             inevntory.Take(required);
-            inevntory.Add(creates);
+            Item item = (Item)Activator.CreateInstance(creates.GetType(), creates.Ammount);
+            inevntory.Add(item); 
         }
     }
 }

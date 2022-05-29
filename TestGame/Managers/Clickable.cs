@@ -8,4 +8,12 @@ namespace TestGame.Managers
     {
         public void Clicked(float x, float y, Game1 g);
     }
+    public interface RightClickable
+    {
+        public void RightClicked(float x, float y, Game1 g);
+    }
+    public interface Hoverable{
+        public void Hover(float x, float y, Game1 g);
+    }
+
 }

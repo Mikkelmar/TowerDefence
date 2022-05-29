@@ -8,11 +8,13 @@ using TestGame.Managers;
 
 namespace TestGame.Huds.ActiveHuds
 {
-    public class Crafting : ActiveUI, KeyboardLisner
+    public class Crafting : ActiveUI
     {
+        private ItemDisplayer itemDisplayer;
         public Crafting(Game1 g)
         {
             CraftingList craftingList = new CraftingList();
+            
             Add(craftingList);
 
             int index = 0;
@@ -23,16 +25,9 @@ namespace TestGame.Huds.ActiveHuds
                 Add(cs);
                 index++;
             }
-            g.pageGame.keyBoardManager.Add(this);
-        }
 
-        public void KeyPressed(KeyboardState kb, Game1 g)
-        {
-            if (kb.IsKeyDown(Keys.E))
-            {
-                g.pageGame.hudManager.Close(g);
-                g.pageGame.keyBoardManager.Remove(this);
-            }
+            itemDisplayer = new ItemDisplayer(g.pageGame.player.inventory, 8, 5, 220, 140, g);
+            Add(itemDisplayer);
         }
     }
 }

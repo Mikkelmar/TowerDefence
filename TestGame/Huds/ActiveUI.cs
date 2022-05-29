@@ -20,5 +20,12 @@ namespace TestGame.Huds
         public void Add(Hud hud) { huds.Add(hud); }
         public void Remove(Hud hud) { huds.Remove(hud); }
         public void Clear() { huds.Clear(); }
+        public override void Destroy(Game1 g)
+        {
+            foreach (Hud hud in huds)
+            {
+                hud.Destroy(g);
+            }
+        }
     }
 }
