@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using TestGame.Containers;
 using TestGame.Graphics;
@@ -16,9 +17,9 @@ namespace TestGame.Huds.ActiveHuds
 
     public ChestUI(Game1 g, SlotContainer slotContainer)
     {
-        this.sprite = new Sprite(Textures.inevntoryUI);
-        this.X = 90;
-        this.Y = 140;
+        sprite = new Sprite(Textures.inevntoryUI);
+        X = 90;
+        Y = 140;
         Width = 166 * 4;
         Height = 104 * 4;
         itemDisplayer = new ItemDisplayer(g.pageGame.player.inventory, 8, 5, 210, 180, g);
@@ -28,7 +29,7 @@ namespace TestGame.Huds.ActiveHuds
     }
     public override void Draw(Game1 g)
     {
-        sprite.Draw(GetRectangle(g));
+        sprite.Draw(GetPos(g), Width, Height, depth);
         base.Draw(g);
     }
    

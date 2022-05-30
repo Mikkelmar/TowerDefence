@@ -10,7 +10,7 @@ namespace TestGame.Containers.Items
     public class Item
     {
         public Sprite Sprite;
-        public enum ItemType { Weapon, Food, Bulding, Misc, Armour };
+        public enum ItemType { Weapon, Food, Fuel, Meltable, Misc, Armour };
         public string Name { get; }
         public ItemType itemType;
         public int Ammount { get; set; }
@@ -26,22 +26,19 @@ namespace TestGame.Containers.Items
         {
             this.Ammount += ammount;
         }
-        public void Draw(int x, int y, int size, float depth = 0.01f, bool showAmmount = true)
+        public void Draw(float x, float y, int size, float depth = 0.01f, bool showAmmount = true)
         {
-            Sprite.Draw(new Rectangle(x, y, size, size), depth);
+            Sprite.Draw(new Vector2(x, y), size, depth);
             if (Ammount != 1 && showAmmount) //displayer kun antall hvis det ikke er kun 1
             {
                 Drawing.DrawText(Ammount.ToString(), x + 40, y + 40, depth * 0.5f);
             }
         }
-        public void Draw(Vector2 pos, int size, float depth = 0.01f, bool showAmmount = true)
+        public void Draw(Vector2 pos, int size = 64, float depth = 0.01f, bool showAmmount = true)
         {
             Draw(pos.X, pos.Y, size, depth, showAmmount);
         }
-        public void Draw(float x, float y, int size, float depth = 0.01f, bool showAmmount = true)
-        {
-            Draw((int)x, (int)y, size, depth, showAmmount);
-        }
+  
         protected static Rectangle getSpriteRect(int x, int y, int with = 1, int height = 1)
         {
             return new Rectangle(x * 16, 16 * y, 16 * with, 16 * height);

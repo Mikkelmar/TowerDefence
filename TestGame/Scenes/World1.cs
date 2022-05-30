@@ -24,7 +24,6 @@ namespace TestGame.Scenes
         }
         public override void Init(Game1 g)
         {
-            Debug.WriteLine("INIT ONCE");
             tileset = g.Content.Load<Texture2D>("!CL_DEMO");
             var Objects = new List<GameObject>();
             foreach (var o in g.Map.ObjectGroups["Objects"].Objects)

@@ -13,6 +13,17 @@ namespace TestGame.Huds
         public float depth = 0.00000001f;
         public bool rendered = true, visiable = true;
         protected bool relative = true;
+
+        protected Vector2 GetPos(Game1 g)
+        {
+            float cx = 0, cy = 0;
+            if (relative)
+            {
+                cx = g.pageGame.cam.position.X;
+                cy = g.pageGame.cam.position.Y;
+            }
+            return new Vector2(X + cx, Y + cy);
+        }
         protected Rectangle GetRectangle(Game1 g)
         {
             float cx = 0, cy = 0;
@@ -22,8 +33,8 @@ namespace TestGame.Huds
                 cy = g.pageGame.cam.position.Y;
             }
             return new Rectangle(
-                (int)(this.X + cx),
-                (int)(this.Y + cy),
+                (int)(X + cx),
+                (int)(Y + cy),
                 Width,
                 Height);
         }

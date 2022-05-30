@@ -37,7 +37,7 @@ namespace TestGame
             fps = (float)(1/delta);
             
         }
-        public static void DrawText(string text, int x, int y, float layerDepth=0.0001f)
+        public static void DrawText(string text, float x, float y, float layerDepth=0.0001f)
         {
             _spriteBatch.DrawString(Textures.font, text, new Vector2(x, y), Color.White, 0.0f, new Vector2(0, 0), 1f, SpriteEffects.None, layerDepth);
         }

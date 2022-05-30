@@ -35,7 +35,7 @@ namespace TestGame.Managers
             }
             
 
-            transform = Matrix.CreateTranslation((int)-position.X, -position.Y, 0)
+            transform = Matrix.CreateTranslation(-position.X, -position.Y, 0)
                 //*Matrix.CreateScale(zoomScale)
                 ;
      

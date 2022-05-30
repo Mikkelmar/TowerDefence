@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using System.Diagnostics;
 using TestGame.Containers;
 using TestGame.Graphics;
@@ -17,6 +18,7 @@ namespace TestGame.Objects
         public float walkSpeed = 370f;
         public bool canMove = true;
         private bool down = false;
+        public int ActiveSlot = 0;
         public Player(int x, int y) : base(x, y, 28*3, 28*3, ObjectsID.player, Textures.player) 
         {
             collision = true;
@@ -80,8 +82,20 @@ namespace TestGame.Objects
             {
                 Debug.WriteLine(g.pageGame.mouseManager.mouseRightClickLisners.Count);
             }
-
+            setActiveSlot(new List<Keys>{ Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8 });
+        }
+        private void setActiveSlot(List<Keys> keys)
+        {
+            for(int index= 0; index < keys.Count; index++)
+            {
+                if (kb.IsKeyDown(keys[index]))
+                {
+                    ActiveSlot = index;
+                    return;
+                }
             }
+
+        }
         private void MovmentInput(Game1 g)
         {
             float _speed = walkSpeed * Drawing.delta;

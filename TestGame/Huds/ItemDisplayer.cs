@@ -41,11 +41,9 @@ namespace TestGame.Huds
         public override void Draw(Game1 g)
         {
             sprite.Draw(
-                new Rectangle(
-                    (int)(this.X + g.pageGame.cam.position.X),
-                    (int)(this.Y + g.pageGame.cam.position.Y),
-                    (int)widthAddmount*size + space*2,
-                    (int)heightAddmount*size + space*2),
+                GetPos(g),
+                widthAddmount * size + space * 2,
+                heightAddmount * size + space * 2,
                 depth
                );
             foreach (ItemSlot itemSlot in slots)

@@ -39,18 +39,30 @@ namespace TestGame.Huds
 
                 if (itemAtSlot == null && holding != null)
                 {
-                    inContainer.AddToSlot(holding, slotID);
-                    g.pageGame.hudManager.Holding = null;
+                    if (inContainer.CanAdd(holding))
+                    {
+                        inContainer.AddToSlot(holding, slotID);
+                        g.pageGame.hudManager.Holding = null;
+                    }
                 }
                 else if (itemAtSlot == null || itemAtSlot.Equals(holding)){
-                    inContainer.AddToSlot(holding, slotID);
-                    g.pageGame.hudManager.Holding = null;
+                    {
+                        if (inContainer.CanAdd(holding))
+                        {
+                            inContainer.AddToSlot(holding, slotID);
+                            g.pageGame.hudManager.Holding = null;
+                        }
+                    }
                 }
                 else if (itemAtSlot != null || !itemAtSlot.Equals(holding))
                 {
-                    Item swappedItem = inContainer.RemoveItemAtSlot(slotID);
-                    inContainer.AddToSlot(holding, slotID);
-                    g.pageGame.hudManager.Holding = swappedItem;
+                    if(holding == null || inContainer.CanAdd(holding))
+                    {
+                        Item swappedItem = inContainer.RemoveItemAtSlot(slotID);
+                        inContainer.AddToSlot(holding, slotID);
+                        g.pageGame.hudManager.Holding = swappedItem;
+                    }
+                    
                 }
             }
         }
@@ -74,22 +86,24 @@ namespace TestGame.Huds
 
                 if ((itemAtSlot == null || itemAtSlot.Equals(holding)) && holding != null)
                 {
-                    Item clonedItem = holding.Clone();
-                    holding.addAmmount(-1);
-                    clonedItem.Ammount = 1;
-                    inContainer.AddToSlot(clonedItem, slotID);
-                    if(holding.Ammount == 0)
-                    {
-                        g.pageGame.hudManager.Holding = null;
+                    if (inContainer.CanAdd(holding)) { 
+                        Item clonedItem = holding.Clone();
+                        holding.addAmmount(-1);
+                        clonedItem.Ammount = 1;
+                        inContainer.AddToSlot(clonedItem, slotID);
+                        if(holding.Ammount == 0)
+                        {
+                            g.pageGame.hudManager.Holding = null;
+                        }
                     }
-                    
+
                 }
                 else if (holding == null && itemAtSlot != null)
                 {
                     Item clonedItem = itemAtSlot.Clone();
                     if(itemAtSlot.Ammount == 1)
                     {
-                        inContainer.AddToSlot(holding, slotID);
+                        inContainer.RemoveItemAtSlot(slotID);
                         g.pageGame.hudManager.Holding = clonedItem;
                     }
                     else
@@ -102,9 +116,13 @@ namespace TestGame.Huds
                 }
                 else if (holding != null && itemAtSlot != null && holding.Equals(itemAtSlot))
                 {
-                    Item swappedItem = inContainer.RemoveItemAtSlot(slotID);
-                    inContainer.AddToSlot(holding, slotID);
-                    g.pageGame.hudManager.Holding = swappedItem;
+                    if (inContainer.CanAdd(holding))
+                    {
+                        Item swappedItem = inContainer.RemoveItemAtSlot(slotID);
+                        inContainer.AddToSlot(holding, slotID);
+                        g.pageGame.hudManager.Holding = swappedItem;
+                    }
+                        
                 }
             }
         }

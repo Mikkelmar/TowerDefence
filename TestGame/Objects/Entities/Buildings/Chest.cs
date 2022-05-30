@@ -16,6 +16,11 @@ namespace TestGame.Objects.Entities.Buildings
             this.solid = true;
             container = new SlotContainer(capacity, Xrow, Yrow);
         }
+        public Chest(int x, int y, SlotContainer container) : base(x, y, 16 * 6, 16 * 6, 5, new Sprite(Textures.spriteSheet_1, new Rectangle(16 * 29, 16 * 14, 32, 32)))
+        {
+            this.solid = true;
+            this.container = container;
+        }
         public override void Update(GameTime gt, Game1 g)
         {
         }

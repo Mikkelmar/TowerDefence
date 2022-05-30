@@ -18,7 +18,7 @@ namespace TestGame.Huds
         }
         public override void Draw(Game1 g)
         {
-            sprite.Draw(GetRectangle(g));
+            sprite.Draw(GetPos(g), Width, Height, depth);
         }
     }
 }

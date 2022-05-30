@@ -6,27 +6,26 @@ using TestGame.Graphics;
 
 namespace TestGame.Containers.Items
 {
-    public class Wood : Item
+    public class Wood : Fuel
     {
         public Wood(int ammount=1) 
             : base(
                 new Sprite(Textures.spriteSheet_1, new Rectangle(33 * 16, 16*5, 16, 16)), 
                 "Wood",
+                new TimeSpan(0, 0, 3),
                 ammount)
-        {
-            
-        }
+        {}
+
     }
-    public class Stone : Item
+    public class Stone : MeltAble
     {
         public Stone(int ammount = 1)
             : base(
                 new Sprite(Textures.spriteSheet_1, new Rectangle(36 * 16, 16 * 6, 16, 16)),
                 "Stone",
-                ammount)
-        {
+                new Iron())
+        {}
 
-        }
     }
     public class Apple : Item
     {
@@ -36,7 +35,7 @@ namespace TestGame.Containers.Items
                 "Apple",
                 ammount)
         {
-
+            itemType = ItemType.Food;
         }
     }
     public class Bow : Item

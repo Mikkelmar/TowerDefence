@@ -51,6 +51,9 @@ namespace TestGame.Pages
             objectManager.Add(new ItemEntity(568, 128, new Stone()), g);
             objectManager.Add(new ItemEntity(608, 128, new Apple()), g);
             objectManager.Add(new CraftingTable(608, 628), g);
+            objectManager.Add(new Furnace(208, 328), g);
+            objectManager.Add(new Furnace(108, 328), g);
+            objectManager.Add(new Chest(408, 798, new SpecializedSlotContainer(5, Item.ItemType.Food, 1, 5)), g);
             objectManager.Add(new Chest(608, 798), g);
             Chest largeChest = new Chest(698, 798, 16, 4, 4);
             ItemContainer ic = new StackContainer(new List<Item>{new Wood(40), new Stone(8)});

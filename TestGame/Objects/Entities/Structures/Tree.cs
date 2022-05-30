@@ -14,14 +14,12 @@ namespace TestGame.Objects.Entities.Structures
             this.hitbox = new Rectangle(16*3, 16*3*3, 16*3, 16*3);
         }
         public override void Destroy(Game1 g)
-        {
-        }
+        {}
 
         
 
         public override void Init(Game1 g)
-        {
-        }
+        {}
 
         public override void Update(GameTime gt, Game1 g)
         {
