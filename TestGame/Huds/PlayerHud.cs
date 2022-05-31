@@ -25,9 +25,13 @@ namespace TestGame.Huds
         }
         public override void Draw(Game1 g)
         {
-
-
             Vector2 pos = GetPos(g);
+            Drawing.FillRect(new Rectangle((int)pos.X, (int)pos.Y - 40, 64*3, 32), Color.Red, depth * 0.0001f, g);
+            Drawing.FillRect(new Rectangle((int)pos.X, (int)pos.Y - 40, (int)((64*3) * ((float)player.Health / player.BaseHealth)), 32), Color.LawnGreen, depth * 0.00001f, g);
+            Drawing.DrawText((player.Health+"/"+player.BaseHealth), (int)pos.X+16, (int)pos.Y - 40, depth * 0.000001f);
+
+
+            pos = GetPos(g);
             sprite.Draw(
                 GetPos(g), Width, Height,
                 depth

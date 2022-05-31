@@ -13,31 +13,36 @@ namespace TestGame.Objects.Entities
     {
         public Item item;
         private float Speed = 10;
+        private TimeSpan graceTime = new TimeSpan(0, 0, 1); // 1 sekund for man kan plukke opp
         public ItemEntity(int x, int y, Item item) : base(x, y, 32, 32, 0, item.Sprite)
         {
             this.item = item;
         }
         public override void Update(GameTime gt, Game1 g)
         {
-            Player player = g.pageGame.GetPlayer();
+            if(graceTime.Ticks > 0)
+            {
+                graceTime -= gt.ElapsedGameTime;
+            }
+            else { 
+                Player player = g.pageGame.GetPlayer();
 
-            if (player.inventory.CanAdd(this.item)){
-                float dist = player.DistanceTo(this.GetPosCenter());
+                if (player.inventory.CanAdd(this.item)){
+                    float dist = player.DistanceTo(this.GetPosCenter());
 
 
-                if (dist <= 150)
-                {
-                    float _speed = (float)((this.Speed * Drawing.delta) * 10 / Math.Pow(dist / 100, 2));
-                    this.MoveTowards(player, g, _speed);
-                    if (dist <= 50)
+                    if (dist <= 150)
                     {
-                        player.inventory.Add(this.item);
-                        g.pageGame.objectManager.Remove(this, g);
+                        float _speed = (float)((this.Speed * Drawing.delta) * 10 / Math.Pow(dist / 100, 2));
+                        this.MoveTowards(player, g, _speed);
+                        if (dist <= 50)
+                        {
+                            player.inventory.Add(this.item);
+                            g.pageGame.objectManager.Remove(this, g);
+                        }
                     }
                 }
             }
-            
-
         }
         protected void MoveTowards(GameObject obj, Game1 g, float moveSpeed)
         {

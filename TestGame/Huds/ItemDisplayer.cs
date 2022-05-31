@@ -10,7 +10,7 @@ using TestGame.Managers;
 
 namespace TestGame.Huds
 {
-    class ItemDisplayer : Hud, Clickable, RightClickable
+    class ItemDisplayer : Hud, Clickable, Useable
     {
         private SlotContainer slotContainer;
         private int widthAddmount, heightAddmount;

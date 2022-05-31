@@ -58,6 +58,16 @@ namespace TestGame.Containers
                 Take(i, i.Ammount);
             }
         }
+        public virtual bool Contain(Predicate<Item> filter) {
+            foreach (Item i in GetItems())
+            {
+                if (filter(i))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public virtual bool Contain(Item item) { return getItem(item) != null; }
         public bool Contain(Item item, int ammount) {
             return Contain(item) && getItem(item).Ammount >= ammount;

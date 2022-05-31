@@ -26,6 +26,11 @@ namespace TestGame.Graphics
         {
             this.rectangle = rectangle;
         }
+        //Welcome to overload hell
+        public void Draw(Vector2 pos, float width, float height, float layerDepth = 0.00001f, float rotation = 0.0f, Vector2? origin = null)
+        {
+            Draw(Drawing._spriteBatch, pos.X, pos.Y, width, height, layerDepth, null, rotation, origin);
+        }
         public void Draw(Vector2 pos, float width, float height, float layerDepth = 0.00001f)
         {
             Draw(Drawing._spriteBatch, pos.X, pos.Y, width, height, layerDepth, null);
@@ -52,7 +57,7 @@ namespace TestGame.Graphics
             Draw(Drawing._spriteBatch, pos, layerDepth, null, scale);
         }
 
-        public void Draw(SpriteBatch spritebatch, Rectangle rect, float layerDepth = 0.00001f, Rectangle? bounds = null, int scale = 1)
+        public void Draw(SpriteBatch spritebatch, Rectangle rect, float layerDepth = 0.00001f, Rectangle? bounds = null, float rotation = 0.0f)
         {
             Rectangle? useBounds = rectangle;
             if (bounds != null)
@@ -64,15 +69,20 @@ namespace TestGame.Graphics
                     rect,
                     useBounds,
                     Color.White,
-                    0.0f,
+                    rotation,
                     Vector2.Zero,
                     SpriteEffects.None,
                     layerDepth
                );
         }
-        public void Draw(SpriteBatch spritebatch, float x, float y, float width, float height, float layerDepth = 0.00001f, Rectangle? bounds = null)
+        public void Draw(SpriteBatch spritebatch, float x, float y, float width, float height, float layerDepth = 0.00001f, Rectangle? bounds = null, float rotation = 0.0f, Vector2? origin = null)
         {
             Rectangle? useBounds = rectangle;
+            Vector2? originVecotr = origin;
+            if (originVecotr == null)
+            {
+                originVecotr = Vector2.Zero;
+            }
             if (bounds != null)
             {
                 useBounds = (Rectangle)bounds;
@@ -84,8 +94,8 @@ namespace TestGame.Graphics
                     new Vector2(x, y),
                     useBounds,
                     Color.White,
-                    0.0f,
-                    Vector2.Zero,
+                    rotation,
+                    (Vector2)originVecotr,
                     new Vector2(width / ((Rectangle)useBounds).Width, height / ((Rectangle)useBounds).Height),
                     SpriteEffects.None,
                     layerDepth
@@ -98,8 +108,8 @@ namespace TestGame.Graphics
                     new Vector2(x, y),
                     useBounds,
                     Color.White,
-                    0.0f,
-                    Vector2.Zero,
+                    rotation,
+                    (Vector2)originVecotr,
                     new Vector2(width / Texture.Width, height / Texture.Height),
                     SpriteEffects.None,
                     layerDepth

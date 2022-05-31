@@ -8,7 +8,7 @@ namespace TestGame.Graphics
     public static class Textures
     {
         public static Texture2D monster, player, spriteSheet_1, inevbar, craftingUI, inevntoryUI, spriteSheet_2,
-            slot, selectedSlot, itemContainer, melting, doneArrow, spriteSheet_3, fireIcon;
+            slot, selectedSlot, itemContainer, melting, doneArrow, spriteSheet_3, fireIcon, zombieAcrher;
         public static SpriteFont font;
         public static void Load(Game1 g)
         {
@@ -23,6 +23,7 @@ namespace TestGame.Graphics
             melting = g.Content.Load<Texture2D>("melting");
             doneArrow = g.Content.Load<Texture2D>("doneArrow");
             fireIcon = g.Content.Load<Texture2D>("fireIcon");
+            zombieAcrher = g.Content.Load<Texture2D>("zombieAcrher");
 
             spriteSheet_1 = g.Content.Load<Texture2D>("!CL_DEMO");
             spriteSheet_2 = g.Content.Load<Texture2D>("sheet");

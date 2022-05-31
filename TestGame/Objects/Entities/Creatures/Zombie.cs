@@ -10,11 +10,12 @@ namespace TestGame.Objects.Entities.Creatures
 {
     public class Zombie : Hostile, Clickable
     {
-        public Zombie(int x, int y, int w, int h) : base(x, y, w, h, 3, Textures.monster)
+        public Zombie(int x, int y, int w =64, int h = 64) : base(x, y, w, h, 3, Textures.monster)
         {
             this.Speed = 50;
             this.Health = 20;
             this.Name = "Zombie";
+            this.loot = new Apple();
         }
 
         public void Clicked(float x, float y, Game1 g)
@@ -29,17 +30,14 @@ namespace TestGame.Objects.Entities.Creatures
         public override void Destroy(Game1 g)
         {
             g.pageGame.mouseManager.Remove(this);
+            base.Destroy(g);
         }
 
-        public override void Die(Game1 g)
-        {
-            g.pageManager.GetPage().objectManager.Remove(this, g);
-            g.pageManager.GetPage().objectManager.Add(new ItemEntity((int)this.X, (int)this.Y, new Apple()), g);
-        }
 
         public override void Init(Game1 g)
         {
             g.pageGame.mouseManager.Add(this, true);
+            base.Init(g);
         }
     }
 }

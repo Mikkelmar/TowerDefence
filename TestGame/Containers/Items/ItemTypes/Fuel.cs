@@ -4,7 +4,7 @@ using System.Text;
 using TestGame.Containers.Items;
 using TestGame.Graphics;
 
-namespace TestGame.Containers.ItemTypes
+namespace TestGame.Containers.Items.ItemTypes
 {
     public abstract class Fuel : Item
     {

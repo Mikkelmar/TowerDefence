@@ -3,14 +3,17 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
 using TestGame.Containers;
+using TestGame.Containers.Items;
+using TestGame.Containers.Items.ItemTypes;
 using TestGame.Graphics;
 using TestGame.Huds.ActiveHuds;
 using TestGame.Managers;
+using TestGame.Objects.Entities.Creatures;
 using TestGame.Objects.Entities.Structures;
 
 namespace TestGame.Objects
 {
-    public class Player : Entity
+    public class Player : Creature, Managers.Useable, Clickable
     {
         public SlotContainer inventory;
         //input
@@ -19,20 +22,36 @@ namespace TestGame.Objects
         public bool canMove = true;
         private bool down = false;
         public int ActiveSlot = 0;
+        private ItemContainer CurrentlyUsing;
         public Player(int x, int y) : base(x, y, 28*3, 28*3, ObjectsID.player, Textures.player) 
         {
+            Health = 10;
+            DisplayHealth = false;
             collision = true;
             this.hitbox = new Rectangle((int)Width/4, (int)(Height/3.5), (int)Width / 2, (int)(Height - Height / 3.5));
         }
+        public void UseItem(Item item, float x, float y, GameTime gt, Game1 g, bool isLeftClick)
+        {
+            if(item is Containers.Items.ItemTypes.Useable)
+            {
+                ((Containers.Items.ItemTypes.Useable)item).Use(this, x, y, gt, g, isLeftClick);
+            }
+            
+        }
         public override void Destroy(Game1 g)
         {
+            g.pageGame.mouseManager.Remove(this);
+            g.pageGame.mouseManager.RemoveRight(this);
         }
 
 
         public override void Init(Game1 g)
         {
             this.inventory = new SlotContainer(24);
+            g.pageGame.mouseManager.Add(this, true);
+            g.pageGame.mouseManager.AddRight(this, true);
             //inventory.Add(new Wood());
+            base.Init(g);
         }
 
         public override void Update(GameTime gt, Game1 g)
@@ -114,5 +133,30 @@ namespace TestGame.Objects
                 xSpeed = (float)(xSpeed * 0.69);
             }
         }
+
+        public override void Die(Game1 g)
+        {
+            Debug.WriteLine("YOU DIED!");
+            //throw new System.NotImplementedException();
+        }
+
+        public void RightClicked(float x, float y, Game1 g)
+        {
+            Click(x, y, g, false);
+        }
+        public void Clicked(float x, float y, Game1 g)
+        {
+            Click(x,y,g,true);
+        }
+        private void Click(float x, float y, Game1 g, bool isLeftClick)
+        {
+            if (inventory.GetItemAtSlot(ActiveSlot) is Containers.Items.ItemTypes.Useable
+                && ((Containers.Items.ItemTypes.Useable)inventory.GetItemAtSlot(ActiveSlot)).UseableOnClick(isLeftClick))
+            {
+                ((Containers.Items.ItemTypes.Useable)inventory.GetItemAtSlot(ActiveSlot)).Activate(this, x, y, g, isLeftClick);
+            }
+        }
+
+        
     }
 }

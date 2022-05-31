@@ -41,7 +41,8 @@ namespace TestGame.Managers
             }
             return false;
         }
-        public bool CanMove(GameObject _object, Rectangle newPos)
+
+        public GameObject CanMove(GameObject _object, Rectangle newPos)
         {
             foreach (GameObject obj in gameObjects)
             {
@@ -51,13 +52,41 @@ namespace TestGame.Managers
                     {
                         if (obj.Intersect(newPos))
                         {
-                            return false;
+                            return obj;
                         }
                     }
                 }
 
             }
-            return true;
+            return null;
+        }
+        public List<GameObject> GetAllObjectsWith(Predicate<GameObject> filter)
+        {
+            List<GameObject> allSelected = new List<GameObject>();
+            foreach (GameObject obj in gameObjects)
+            {
+                if (filter(obj))
+                {
+                    allSelected.Add(obj);
+                }
+
+            }
+            return allSelected;
+        }
+        public GameObject CanMove(GameObject _object, Rectangle newPos, Predicate<GameObject> filter)
+        {
+            foreach (GameObject obj in gameObjects)
+            {
+                if (obj != _object && filter(obj))
+                {
+                    if (obj.Intersect(newPos))
+                    {
+                        return obj;
+                    }
+                }
+
+            }
+            return null;
         }
         public Vector2 FromToDir(GameObject from, GameObject to)
         {

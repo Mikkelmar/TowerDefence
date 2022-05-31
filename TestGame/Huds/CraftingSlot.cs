@@ -17,7 +17,7 @@ namespace TestGame.Huds
             this.Y = y;
             this.Width = 200;
             this.Height = 50;
-            this.depth = 0.00005f;
+            this.depth = 0.0000000005f;
         }
 
         public void Clicked(float x, float y, Game1 g)

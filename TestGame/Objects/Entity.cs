@@ -23,7 +23,7 @@ namespace TestGame.Objects
             //Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);
             sprite.Draw(position, Width, Height, depth);
         }
-        public void Move(Vector2 newPos, Game1 g)
+        public virtual void Move(Vector2 newPos, Game1 g)
         {
             Vector2 nextPos = new Vector2(this.X, this.Y);
             if (g.pageManager.GetPage().objectManager.CanMove(this, 
@@ -32,7 +32,7 @@ namespace TestGame.Objects
                     (int)this.Y + hitbox.Y, 
                     (int)hitbox.Width, 
                     (int)hitbox.Height)
-                ))
+                ) == null) 
             {
                 nextPos.X = newPos.X;
             }
@@ -41,8 +41,7 @@ namespace TestGame.Objects
                     (int)this.X + hitbox.X,
                     (int)newPos.Y + hitbox.Y,
                     (int)hitbox.Width,
-                    (int)hitbox.Height))
-                )
+                    (int)hitbox.Height)) == null)
             {
                 nextPos.Y = newPos.Y;
             }

@@ -9,14 +9,19 @@ namespace TestGame.Objects.Entities.Creatures
 {
     public abstract class Creature : Entity
     {
-        public int Health;
-        public float Speed;
+        public int Health=5, BaseHealth;
+        public float Speed, BaseSpeed;
         public String Name;
         public bool DamageAble = true;
+        protected bool DisplayHealth = true;
         public Creature(int x, int y, int w, int h, int id, Texture2D texture) : base(x, y, w, h, id, texture)
         {
             collision = true;
-
+        }
+        public override void Init(Game1 g)
+        {
+            base.Init(g);
+            BaseHealth = Health;
         }
         public abstract void Die(Game1 g);
         public void TakeDamage(int damage, Game1 g)
@@ -34,6 +39,11 @@ namespace TestGame.Objects.Entities.Creatures
         {
             //Drawing.FillRect(new Rectangle((int)this.X, (int)this.Y - 30, (int)this.Width, 20), Color.Aqua, 0.9f, g);
             base.Draw(g);
+            if (DisplayHealth)
+            {
+                Drawing.FillRect(new Rectangle((int)GetPosCenter().X - 32, (int)Y - 16, 32*2, 16), Color.Red, depth*0.0001f, g);
+                Drawing.FillRect(new Rectangle((int)GetPosCenter().X - 32, (int)Y - 16, (int)((32 * 2)*((float)Health /BaseHealth)), 16), Color.LawnGreen, depth * 0.00001f, g);
+            }
         }
         protected void MoveTowards(GameObject obj, Game1 g, float moveSpeed)
         {
@@ -43,6 +53,16 @@ namespace TestGame.Objects.Entities.Creatures
         protected void MoveAwayFrom(GameObject obj, Game1 g, float moveSpeed)
         {
             MoveTowards(obj, g, -moveSpeed);
+        }
+        protected bool CanSee(GameObject obj, int range = 300)
+        {
+            //TODO: expand on how this works
+            //rn tar den kun avtaden som en faktor
+            if (obj.DistanceTo(this.position) <= range)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

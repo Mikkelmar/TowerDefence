@@ -7,14 +7,15 @@ using TestGame.Graphics;
 
 namespace TestGame.Containers.Items
 {
-    public class Item
+    public abstract class Item
     {
         public Sprite Sprite;
-        public enum ItemType { Weapon, Food, Fuel, Meltable, Misc, Armour };
+        public enum ItemType { Weapon, Food, Fuel, Meltable, Misc, Armour,
+            Arrow
+        }
         public string Name { get; }
         public ItemType itemType;
         public int Ammount { get; set; }
-
         public Item(Sprite texture, String name, int ammount = 1)
         {
             this.Sprite = texture;
@@ -28,7 +29,7 @@ namespace TestGame.Containers.Items
         }
         public void Draw(float x, float y, int size, float depth = 0.01f, bool showAmmount = true)
         {
-            Sprite.Draw(new Vector2(x, y), size, depth);
+            Sprite.Draw(new Vector2(x, y), size, layerDepth: depth);
             if (Ammount != 1 && showAmmount) //displayer kun antall hvis det ikke er kun 1
             {
                 Drawing.DrawText(Ammount.ToString(), x + 40, y + 40, depth * 0.5f);
@@ -56,6 +57,10 @@ namespace TestGame.Containers.Items
                 return false;
             }
             return item.Name.Equals(this.Name);
+        }
+        public override string ToString()
+        {
+            return Name + ": [Ammount: "+Ammount+", Type: "+itemType+"]";
         }
     }
 }

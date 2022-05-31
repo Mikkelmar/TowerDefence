@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TestGame.Containers.Items.ItemTypes;
 using TestGame.Graphics;
 
 namespace TestGame.Containers.Items
@@ -23,22 +24,24 @@ namespace TestGame.Containers.Items
             : base(
                 new Sprite(Textures.spriteSheet_1, new Rectangle(36 * 16, 16 * 6, 16, 16)),
                 "Stone",
-                new Iron())
+                new Iron(),
+                ammount)
         {}
 
     }
-    public class Apple : Item
+    public class Apple : Food
     {
         public Apple(int ammount = 1)
             : base(
                 new Sprite(Textures.spriteSheet_1, getSpriteRect(19, 1)),
                 "Apple",
+                2,
                 ammount)
         {
             itemType = ItemType.Food;
         }
     }
-    public class Bow : Item
+    public class Bow : BowItem
     {
         public Bow(int ammount = 1)
             : base(
@@ -70,5 +73,15 @@ namespace TestGame.Containers.Items
         {
 
         }
+    }
+    public class IronArrow : Arrow
+    {
+        public IronArrow(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(0, 1)),
+                "Iron Arrow",
+                1,
+                ammount)
+        { }
     }
 }

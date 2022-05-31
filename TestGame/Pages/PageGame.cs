@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Text;
 using TestGame.Containers;
 using TestGame.Containers.Items;
+using TestGame.Containers.Items.ItemList;
+using TestGame.Containers.Items.ItemTypes.ItemList;
 using TestGame.Graphics;
 using TestGame.Huds;
 using TestGame.Managers;
@@ -56,13 +58,14 @@ namespace TestGame.Pages
             objectManager.Add(new Chest(408, 798, new SpecializedSlotContainer(5, Item.ItemType.Food, 1, 5)), g);
             objectManager.Add(new Chest(608, 798), g);
             Chest largeChest = new Chest(698, 798, 16, 4, 4);
-            ItemContainer ic = new StackContainer(new List<Item>{new Wood(40), new Stone(8)});
+            ItemContainer ic = new StackContainer(new List<Item>{new Wood(40), new Stone(8), new IronArrow(64), new MultiBow(), new IronSword() });
             largeChest.container.Add(ic);
             objectManager.Add(largeChest, g);
             Wood wood1 = new Wood();
             wood1.addAmmount(5);
             objectManager.Add(new ItemEntity(828, 128, wood1), g);
-            objectManager.Add(new Zombie(228, 228, 16*4, 16*4), g);
+            objectManager.Add(new Zombie(228, 228), g);
+            objectManager.Add(new ZombieArcher(728, 128), g);
             objectManager.Add(player, g);
 
             buildHandler = new BuildHandler(objectManager, sceneManager, g);

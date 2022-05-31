@@ -7,7 +7,7 @@ using TestGame.Managers;
 
 namespace TestGame.Objects.Entities.Buildings
 {
-    public abstract class Building : Entity, RightClickable
+    public abstract class Building : Entity, Useable
     {
         public Building(int x, int y, int width, int height, int id, Sprite sprite) : base(x, y, width, height, id, sprite)
         {
@@ -15,7 +15,7 @@ namespace TestGame.Objects.Entities.Buildings
         }
         public void RightClicked(float x, float y, Game1 g)
         {
-            if (this.Intersect(new Vector2(x, y)))
+            if (g.pageGame.hudManager.activeUI == null && Intersect(new Vector2(x, y)))
             {
                 Open(g);
             }

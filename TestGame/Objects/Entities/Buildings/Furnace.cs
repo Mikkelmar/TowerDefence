@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Text;
 using TestGame.Containers;
 using TestGame.Containers.Items;
+using TestGame.Containers.Items.ItemTypes;
 using TestGame.Graphics;
 using TestGame.Huds.ActiveHuds;
 

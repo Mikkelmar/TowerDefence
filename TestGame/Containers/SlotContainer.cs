@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using TestGame.Containers.Items;
 
@@ -133,6 +134,32 @@ namespace TestGame.Containers
                 Item i = items[slot];
                 items.Remove(slot);
                 return i;
+            }
+            return null;
+        }
+        public void RemoveAmmountAtSlot(int slot, int ammount = 1)
+        {
+            if (items.ContainsKey(slot))
+            {
+                Item i = items[slot];
+                i.addAmmount(-ammount);
+                if(i.Ammount <= 0)
+                {
+                    RemoveItemAtSlot(slot);
+                }
+            }
+        }
+        public Item RemoveAmmountPredicate(Predicate<Item> filter, int ammount = 1)
+        {
+            for (int index = 0; index < Capacity; index++) {
+                Item i = GetItemAtSlot(index);
+                if (i != null && filter(i))
+                {
+                    Item returnItem = i.Clone();
+                    returnItem.Ammount = ammount;
+                    RemoveAmmount(i, ammount);
+                    return returnItem;
+                }
             }
             return null;
         }
