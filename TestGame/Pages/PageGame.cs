@@ -58,7 +58,7 @@ namespace TestGame.Pages
             objectManager.Add(new Chest(408, 798, new SpecializedSlotContainer(5, Item.ItemType.Food, 1, 5)), g);
             objectManager.Add(new Chest(608, 798), g);
             Chest largeChest = new Chest(698, 798, 16, 4, 4);
-            ItemContainer ic = new StackContainer(new List<Item>{new Wood(40), new Stone(8), new IronArrow(64), new MultiBow(), new IronSword() });
+            ItemContainer ic = new StackContainer(new List<Item>{new Wood(40), new Stone(8), new IronArrow(64), new MultiBow(), new IronSword(), new IronAxe() });
             largeChest.container.Add(ic);
             objectManager.Add(largeChest, g);
             Wood wood1 = new Wood();

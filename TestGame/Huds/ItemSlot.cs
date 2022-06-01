@@ -9,7 +9,7 @@ using TestGame.Managers;
 
 namespace TestGame.Huds
 {
-    class ItemSlot : Hud, Clickable, Useable
+    class ItemSlot : Hud, Clickable, RightClickable
     {
 
         private SlotContainer inContainer;

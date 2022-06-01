@@ -14,7 +14,7 @@ namespace TestGame.Managers
          * if true the mouse cords + camera position is alerted back at the lisner
          * */
         public Dictionary<Clickable, bool> mouseLeftClickLisners = new Dictionary<Clickable, bool>();
-        public Dictionary<Useable, bool> mouseRightClickLisners = new Dictionary<Useable, bool>();
+        public Dictionary<RightClickable, bool> mouseRightClickLisners = new Dictionary<RightClickable, bool>();
         private MouseState oldState = Mouse.GetState();
         public void Update(GameTime gt, Game1 g)
         {
@@ -39,8 +39,8 @@ namespace TestGame.Managers
             }
             if (newState.RightButton == ButtonState.Pressed && oldState.RightButton == ButtonState.Released)
             {
-                List<Useable> lisners = new List<Useable>(mouseRightClickLisners.Keys);
-                foreach (Useable lisner in lisners)
+                List<RightClickable> lisners = new List<RightClickable>(mouseRightClickLisners.Keys);
+                foreach (RightClickable lisner in lisners)
                 {
                     if(mouseRightClickLisners.ContainsKey(lisner)){ 
                     if (mouseRightClickLisners[lisner])
@@ -66,8 +66,8 @@ namespace TestGame.Managers
         public void Add(Clickable obj, bool relative = false) { mouseLeftClickLisners.Add(obj, relative);}
         public void Remove(Clickable obj) { mouseLeftClickLisners.Remove(obj); }
         public void Clear() { mouseLeftClickLisners.Clear(); }
-        public void AddRight(Useable obj, bool relative = false) { mouseRightClickLisners.Add(obj, relative); }
-        public void RemoveRight(Useable obj) { mouseRightClickLisners.Remove(obj); }
+        public void AddRight(RightClickable obj, bool relative = false) { mouseRightClickLisners.Add(obj, relative); }
+        public void RemoveRight(RightClickable obj) { mouseRightClickLisners.Remove(obj); }
         public void ClearRight() { mouseRightClickLisners.Clear(); }
     }
 }

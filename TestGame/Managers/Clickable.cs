@@ -8,7 +8,7 @@ namespace TestGame.Managers
     {
         public void Clicked(float x, float y, Game1 g);
     }
-    public interface Useable
+    public interface RightClickable
     {
         public void RightClicked(float x, float y, Game1 g);
     }

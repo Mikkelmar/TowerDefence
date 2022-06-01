@@ -15,6 +15,7 @@ namespace TestGame.Containers.Items.ItemTypes
         public int Damage;
         private ItemSwing itemSwing;
         public float Speed = 300;
+        public TimeSpan WeaponSpeed = new TimeSpan(0, 0, 0, 0, 200); //the attack default lasts 500 millisecunds
         public Weapon(Sprite sprite, string name, int Damage, int ammount = 1)
            : base(sprite, name, ammount)
         {

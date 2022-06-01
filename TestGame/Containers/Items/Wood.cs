@@ -38,7 +38,6 @@ namespace TestGame.Containers.Items
                 2,
                 ammount)
         {
-            itemType = ItemType.Food;
         }
     }
     public class Bow : BowItem

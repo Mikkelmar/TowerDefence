@@ -42,15 +42,15 @@ namespace TestGame.Objects.Entities.Creatures
         private void HandleMovment(Game1 g)
         {
             Player player = g.pageGame.GetPlayer();
-            if (player.DistanceTo(this.position) <= 600)
+            if (player.DistanceTo(this.position) <= 450)
             {
                 float _speed = Speed * Drawing.delta;
 
-                if (player.DistanceTo(this.position) <= 300)
+                if (player.DistanceTo(this.position) <= 280)
                 {
                     _speed *= -1;
                 }
-                else if (player.DistanceTo(this.position) <= 400)
+                else if (player.DistanceTo(this.position) <= 350)
                 {
                     return;
                 }

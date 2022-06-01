@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using TestGame.Containers;
 using TestGame.Graphics;
@@ -35,8 +36,15 @@ namespace TestGame.Huds.ActiveHuds
         public override void Draw(Game1 g)
     {
             sprite.Draw(GetPos(g), Width, Height, depth);
-            //int fireCrop = (int)(128 - 128 * furnace.GetFirePercentLeft());
-            //fire.Draw(new Rectangle(Width - 480, 350, 128, fireCrop), new Rectangle(0,0,32, fireCrop), (float)(depth * 0.1));
+
+            //TODO lmao fix this fire animation
+            int fireCrop = (int)(32 * furnace.GetFirePercentLeft());
+
+            Rectangle firePos = new Rectangle(Width - 595, 680-(int)(128 * furnace.GetFirePercentLeft()), 128, (int)(128*furnace.GetFirePercentLeft()));
+            
+            fire.Draw(firePos, (float)(depth * 0.1), 
+                new Rectangle(0, 32 - fireCrop, 32, fireCrop)
+               );
 
             //int progressCrop = (int)(128 * furnace.GetMeltingPercentLeft());
             //progress.Draw(new Rectangle(Width - 400, 210, progressCrop, 128), new Rectangle(0, 0, progressCrop, 32), (float)(depth * 0.1));

@@ -52,6 +52,10 @@ namespace TestGame.Graphics
         {
             Draw(Drawing._spriteBatch, pos, layerDepth, null, scale);
         }
+        public void Draw(Rectangle pos, float layerDepth = 0.00001f, Rectangle? bounds = null)
+        {
+            Draw(Drawing._spriteBatch, pos, layerDepth, bounds);
+        }
         public void Draw(Rectangle pos, float layerDepth = 0.00001f, int scale = 3)
         {
             Draw(Drawing._spriteBatch, pos, layerDepth, null, scale);

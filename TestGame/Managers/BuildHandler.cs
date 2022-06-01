@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -24,6 +25,15 @@ namespace TestGame.Managers
             if (!objm.Intersect(obj.GetHitbox()))
             {
                 objm.Add(obj, g);
+                return true;
+            }
+            return false;
+        }
+        public bool CanBuild(int x, int y, int width = 1, int height = 1)
+        {
+            Rectangle rect = new Rectangle(x, y, width*64, height*64);
+            if (!objm.Intersect(rect))
+            {
                 return true;
             }
             return false;

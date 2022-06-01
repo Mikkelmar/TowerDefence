@@ -7,7 +7,7 @@ using TestGame.Managers;
 
 namespace TestGame.Objects.Entities.Buildings
 {
-    public abstract class Building : Entity, Useable
+    public abstract class Building : Entity, RightClickable
     {
         public Building(int x, int y, int width, int height, int id, Sprite sprite) : base(x, y, width, height, id, sprite)
         {

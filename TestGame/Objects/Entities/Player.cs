@@ -13,7 +13,7 @@ using TestGame.Objects.Entities.Structures;
 
 namespace TestGame.Objects
 {
-    public class Player : Creature, Managers.Useable, Clickable
+    public class Player : Creature, RightClickable, Clickable
     {
         public SlotContainer inventory;
         //input

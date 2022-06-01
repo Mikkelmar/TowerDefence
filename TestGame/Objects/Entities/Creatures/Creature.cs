@@ -3,11 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TestGame.Containers.Items;
 using TestGame.Managers;
 
 namespace TestGame.Objects.Entities.Creatures
 {
-    public abstract class Creature : Entity
+    public abstract class Creature : Entity, Destructable
     {
         public int Health=5, BaseHealth;
         public float Speed, BaseSpeed;
@@ -64,5 +65,11 @@ namespace TestGame.Objects.Entities.Creatures
             }
             return false;
         }
+
+        public virtual Predicate<Item> CanDestroy()
+        {
+            return (i) => true;
+        }
+
     }
 }

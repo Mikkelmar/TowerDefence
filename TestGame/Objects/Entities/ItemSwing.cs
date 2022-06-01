@@ -13,11 +13,10 @@ namespace TestGame.Objects.Entities
     {
         private Weapon item;
         private Entity user;
-        private List<Creature> objectsHit = new List<Creature>();
+        private List<Entity> objectsHit = new List<Entity>();
         private float offSetX, offSetY;
         private float rotation;
-        private TimeSpan attackTime = new TimeSpan(0,0,0,0,200), //the attack default lasts 500 millisecunds
-            currentTime = new TimeSpan();
+        private TimeSpan currentTime = new TimeSpan();
         public ItemSwing (int x, int y, int w, int h, Weapon item) : base(x, y, w, h, 0, item.Sprite) {
             offSetX = 0;
             offSetY = 0;
@@ -25,6 +24,7 @@ namespace TestGame.Objects.Entities
             this.item = item;
             //rotation = (float)Math.Atan2(Direction.Y, Direction.X);
             rotation = (float)((Math.PI / 4) + Math.PI);
+            depth = 0.00000001f;
         }
         public ItemSwing(Entity user, int w, int h, Weapon item) : this((int)user.X, (int)user.Y, w, h, item) {
             this.user = user;
@@ -33,8 +33,8 @@ namespace TestGame.Objects.Entities
         {
             if(user != null)
             {
-                X = user.X;
-                Y = user.Y;
+                X = user.GetPosCenter().X;
+                Y = user.GetPosCenter().Y;
             }
 
             float _speed = (float)(item.Speed * Drawing.delta);
@@ -49,23 +49,40 @@ namespace TestGame.Objects.Entities
         }
         private void rotateItem(GameTime gt)
         {
-            rotation = (float)((float)((Math.PI / 4) + Math.PI)+ (currentTime/ attackTime)* (Math.PI / 2));
+            rotation = (float)((float)((Math.PI / 4)) - (currentTime/ item.WeaponSpeed)* (Math.PI*2/ 3));
         }
         private void checkForHits(Game1 g)
         {
             List<GameObject> entities = g.pageGame.objectManager.GetAllObjectsWith(
-                (o) => (o is Creature) && !o.Equals(this) && o != user && !objectsHit.Contains((Creature)o) && this.Intersect(o) 
-                );
-            foreach(GameObject targetsHit in entities)
+               (o) => (o is Entity) && 
+                (o is Destructable) && 
+                ((Destructable)o).CanDestroy()(item) && 
+                !o.Equals(this) && 
+                o != user && 
+                !objectsHit.Contains((Entity)o) && 
+                Intersect(o) 
+               );
+
+            foreach (GameObject targetsHit in entities)
             {
-                ((Creature)targetsHit).TakeDamage(item.Damage, g);
-                objectsHit.Add((Creature)targetsHit);
+                if (!(targetsHit is Destructable)) { 
+                    if(targetsHit is Creature)
+                    {
+                        ((Creature)targetsHit).TakeDamage(item.Damage, g);
+                    }
+                         
+                }
+                else
+                {
+                    ((Destructable)targetsHit).TakeDamage(item.Damage, g);
+                }
+                objectsHit.Add((Entity)targetsHit);
             }
         }
         private void checkIfDoneAttacking(GameTime gt, Game1 g)
         {
             currentTime += gt.ElapsedGameTime;
-            if(currentTime > attackTime)
+            if(currentTime > item.WeaponSpeed)
             {
                 item.DoneUsing();
                 g.pageGame.objectManager.Remove(this, g);
@@ -73,7 +90,7 @@ namespace TestGame.Objects.Entities
         }
         public override void Draw(Game1 g)
         {
-            //Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);
+            Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);
             sprite.Draw(position, Width, Height, depth, rotation, new Vector2(16,16));
         }
 
