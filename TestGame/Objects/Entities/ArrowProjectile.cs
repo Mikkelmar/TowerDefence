@@ -8,25 +8,30 @@ using TestGame.Containers.Items.ItemTypes;
 using TestGame.Graphics;
 using TestGame.Managers;
 using TestGame.Objects.Entities.Creatures;
+using TestGame.Objects.StatusEffects;
 
 namespace TestGame.Objects.Entities
 {
     public class ArrowProjectile : Entity
     {
-        private int BaseDamage;
-        private float Speed, rotation = 0.0f;
+        private int Damage;
+        private float Speed, Knockback, rotation = 0.0f;
         private Vector2 Direction;
         private Creature caster;
         private Arrow ArrowItem;
-        public ArrowProjectile(float x, float y, Sprite sprite, int Damage, float Speed, Vector2 Direction, Creature caster, Arrow arrow) : base((int)x, (int)y, 32, 32, 0, sprite)
+        private bool DropProjectile;
+        private TimeSpan deSpawn = new TimeSpan(0,0,30);
+        public ArrowProjectile(float x, float y, Sprite sprite, int Damage, float Speed, Vector2 Direction, Creature caster, Arrow arrow, float Knockback = 150, bool DropProjectile = true) : base((int)x, (int)y, 32, 32, 0, sprite)
         {
-            this.BaseDamage = Damage;
+            this.Damage = Damage;
             this.Speed = Speed;
             this.Direction = Direction;
             this.caster = caster;
             ArrowItem = arrow;
             rotation = (float)Math.Atan2(Direction.Y, Direction.X);
             rotation = (float)(rotation - (Math.PI/4)+ Math.PI);
+            this.Knockback = Knockback;
+            this.DropProjectile = DropProjectile;
         }
         public override void Update(GameTime gt, Game1 g)
         {
@@ -34,20 +39,31 @@ namespace TestGame.Objects.Entities
             {
                 Move(new Vector2(X + Direction.X * Speed*Drawing.delta, Y + Direction.Y * Speed * Drawing.delta), g);
             }
-            
+            deSpawn -= gt.ElapsedGameTime;
+
+            if(deSpawn.Ticks <= 0)
+            {
+                g.pageGame.objectManager.Remove(this, g);
+            }
 
         }
         private void Hit(GameObject obj, Game1 g)
         {
             if(obj is Creature)
             {
-                ((Creature)obj).TakeDamage(BaseDamage + ArrowItem.Damage, g);
+                ((Creature)obj).TakeDamage(Damage, g);
+
+                ((Creature)obj).AddStatusEffect(new Knockback(-Direction, Knockback, new TimeSpan(0, 0, 0, 0, 120)));
+
                 g.pageGame.objectManager.Remove(this, g);
             }
             else
             {
-                g.pageGame.objectManager.Add(new ItemEntity((int)X, (int)Y, ArrowItem), g);
-                g.pageGame.objectManager.Remove(this, g);
+                if (DropProjectile)
+                {
+                    g.pageGame.objectManager.Add(new ItemEntity((int)X, (int)Y, ArrowItem), g);
+                    g.pageGame.objectManager.Remove(this, g);
+                }
             }
             Speed = 0;
         }

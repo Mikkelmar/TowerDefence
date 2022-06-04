@@ -93,7 +93,12 @@ namespace TestGame.Managers
             return new Vector2(from.GetPosCenter().X - to.GetPosCenter().X, from.GetPosCenter().Y - to.GetPosCenter().Y);
         }
         public void Add(GameObject obj, Game1 g) { gameObjects.Add(obj); obj.Init(g); }
-        public void Remove(GameObject obj, Game1 g) { obj.Destroy(g); gameObjects.Remove(obj);  }
+        public void Remove(GameObject obj, Game1 g) { 
+            if(obj != null)
+            {
+                obj.Destroy(g); gameObjects.Remove(obj);
+            }
+              }
         public void Remove(int index, Game1 g) { gameObjects[index].Destroy(g); gameObjects.Remove(gameObjects[index]);  }
         public void Clear() { gameObjects.Clear(); }
     }

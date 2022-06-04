@@ -32,6 +32,9 @@ namespace TestGame.Managers
         }
         public int GetTile(int xpos, int ypos)
         {
+            if(xpos < tilesetWidth && ypos < tilesetHeight) {
+                return _map.Layers[0].Tiles[xpos + (ypos * tilesetHeight)].Gid;
+            }
             return 0;
         }
         public void Draw(Game1 g)
@@ -57,7 +60,7 @@ namespace TestGame.Managers
                             tilesetHeight * row,
                             tilesetWidth,
                             tilesetHeight);
-
+                        //TODO: don't use rect as it tends to make the render shutter
                         Drawing._spriteBatch.Draw(tileset, 
                             new Rectangle((int)
                                 (x* game_SIZE), 

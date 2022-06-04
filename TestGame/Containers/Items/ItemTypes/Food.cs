@@ -16,6 +16,7 @@ namespace TestGame.Containers.Items.ItemTypes
         {
             itemType = ItemType.Food;
             this.foodAmmount = foodAmmount;
+            Description = "Restore: " + foodAmmount;
         }
         protected virtual bool CanEat(Game1 g)
         {
@@ -29,7 +30,7 @@ namespace TestGame.Containers.Items.ItemTypes
         }
 
 
-        public void Use(Entity user, float x, float y, GameTime gt, Game1 g, bool leftClick)
+        public void Update(Entity user, GameTime gt, Game1 g)
         {
         }
 

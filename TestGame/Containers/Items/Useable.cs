@@ -8,7 +8,8 @@ namespace TestGame.Containers.Items.ItemTypes
 {
     public interface Useable
     {
-        public void Use(Entity user, float x, float y, GameTime gt, Game1 g, bool leftClick);
+        //While IsUsing == true, -> update() should be called
+        public void Update(Entity user, GameTime gt, Game1 g);
         public void Activate(Entity user, float x, float y, Game1 g, bool leftClick);
         public bool IsUsing();
         public bool UseableOnClick(bool isLeftClick = true);

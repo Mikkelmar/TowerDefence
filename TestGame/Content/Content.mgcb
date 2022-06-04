@@ -26,6 +26,18 @@
 /processorParam:TextureFormat=Color
 /build:!CL_DEMO.png
 
+#begin CopperOre.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CopperOre.png
+
 #begin crafting.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -139,6 +151,18 @@
 /processorParam:TextureFormat=Color
 /build:itemContainer.png
 
+#begin itemContainerTransparent.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:itemContainerTransparent.png
+
 #begin map2.tmx
 /copy:map2.tmx
 
@@ -213,6 +237,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:slot.png
+
+#begin tinOre.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tinOre.png
 
 #begin zombieAcrher.png
 /importer:TextureImporter

@@ -14,6 +14,7 @@ namespace TestGame.Containers.Items.ItemTypes
         {
             itemType = ItemType.Arrow;
             this.Damage = Damage;
+            Description = "Damage: " + Damage;
         }
     }
 }

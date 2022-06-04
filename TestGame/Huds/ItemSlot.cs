@@ -9,12 +9,14 @@ using TestGame.Managers;
 
 namespace TestGame.Huds
 {
-    class ItemSlot : Hud, Clickable, RightClickable
+    class ItemSlot : Hud, Clickable, RightClickable, HoverLisner
     {
 
         private SlotContainer inContainer;
         private int slotID;
         private Sprite slot;
+        private bool beingHovred = false;
+        private float mouseX, mouseY;
         public ItemSlot(int slotID, SlotContainer inContainer)
         {
             this.slotID = slotID;
@@ -74,6 +76,24 @@ namespace TestGame.Huds
             if(inContainer.GetItemAtSlot(slotID) != null)
             {
                 inContainer.GetItemAtSlot(slotID).Draw(CurrentPos, 64, (depth * 0.5f));
+                if (beingHovred) {
+                    //Item.DrawItemInfo(inContainer.GetItemAtSlot(slotID), X, Y);
+                    //Drawing.DrawText(inContainer.GetItemAtSlot(slotID).ToString(), CurrentPos.X, CurrentPos.Y, 0);
+                    ItemHoverInfo.DrawItemInfo(inContainer.GetItemAtSlot(slotID), CurrentPos.X+Width/2, CurrentPos.Y+Height, depth*0.4f);
+                }
+            }
+        }
+
+        public void Hover(float x, float y, Game1 g)
+        {
+            if (new Rectangle((int)X, (int)Y, Width, Height).Contains(new Point((int)x, (int)y)))
+            {
+                beingHovred = true;
+                mouseX = x;
+                mouseY = y;
+            }
+            else{
+                beingHovred = false;
             }
         }
 

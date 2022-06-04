@@ -12,6 +12,8 @@ namespace TestGame.Containers.Items.ItemTypes.ItemList
                 new Sprite(Textures.spriteSheet_2, getSpriteRect(0, 0)),
                 "Iron sword",
                 ammount)
-        { }
+        {
+            Init();
+        }
     }
 }

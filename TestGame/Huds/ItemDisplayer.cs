@@ -10,7 +10,7 @@ using TestGame.Managers;
 
 namespace TestGame.Huds
 {
-    class ItemDisplayer : Hud, Clickable, RightClickable
+    class ItemDisplayer : Hud, Clickable, RightClickable, HoverLisner
     {
         private SlotContainer slotContainer;
         private int widthAddmount, heightAddmount;
@@ -76,12 +76,22 @@ namespace TestGame.Huds
             }
             g.pageGame.mouseManager.Add(this);
             g.pageGame.mouseManager.AddRight(this);
+            g.pageGame.mouseManager.AddHover(this);
         }
         public override void Destroy(Game1 g)
         {
             base.Destroy(g);
             g.pageGame.mouseManager.Remove(this);
             g.pageGame.mouseManager.RemoveRight(this);
+            g.pageGame.mouseManager.RemoveHover(this);
+        }
+
+        public void Hover(float x, float y, Game1 g)
+        {
+            foreach (ItemSlot itemSlot in slots)
+            {
+                itemSlot.Hover(x, y, g);
+            }
         }
     }
 }

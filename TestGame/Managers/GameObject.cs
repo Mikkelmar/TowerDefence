@@ -27,14 +27,14 @@ namespace TestGame.Managers
         public Vector2 spritePos;
 
 
-        protected GameObject(int x, int y, int w, int h, int id)
+        protected GameObject(float x, float y, int w, int h, int id)
         {
             // dimesnions
             this.X = x;
             this.Y = y;
             this.Width = w;
             this.Height = h;
-            bounds = new Rectangle(x, y, w, h);
+            bounds = new Rectangle((int)x, (int)y, w, h);
             hitbox = new Rectangle(0, 0, w, h);
 
             // props
@@ -63,7 +63,7 @@ namespace TestGame.Managers
         public int GetID() { return id; }
         public float DistanceTo(Vector2 pos) { return Vector2.Distance(GetPosCenter(), pos); }
         public Vector2 GetPosCenter() { return new Vector2(X + (Width / 2), Y + (Height / 2)); }
-        public Rectangle GetHitbox() { return new Rectangle((int)X + hitbox.X, (int)Y + hitbox.Y, hitbox.Width, hitbox.Height); }
+        public virtual Rectangle GetHitbox() { return new Rectangle((int)X + hitbox.X, (int)Y + hitbox.Y, hitbox.Width, hitbox.Height); }
         public bool Intersect(GameObject obj)
         {
             return obj.GetHitbox().Intersects(GetHitbox());

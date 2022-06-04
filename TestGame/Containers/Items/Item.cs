@@ -15,6 +15,7 @@ namespace TestGame.Containers.Items
         }
         public string Name { get; }
         public ItemType itemType;
+        public string Description;
         public int Ammount { get; set; }
         public Item(Sprite texture, String name, int ammount = 1)
         {
@@ -62,5 +63,6 @@ namespace TestGame.Containers.Items
         {
             return Name + ": [Ammount: "+Ammount+", Type: "+itemType+"]";
         }
+  
     }
 }

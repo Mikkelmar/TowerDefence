@@ -25,7 +25,7 @@ namespace TestGame.Pages
     public class PageGame : Page
     {
         
-        public Player player = new Player(128, 198);
+        public Player player = new Player(328, 398);
         public BuildHandler buildHandler;
         public Camera cam = new Camera(new Vector2(0, 0));
         public SceneManager sceneManager { get; } = new SceneManager();
@@ -48,17 +48,32 @@ namespace TestGame.Pages
             CraftingRecepies.Init(g);
             //init objects
             objectManager.Add(new Block(128, 128), g);
-            objectManager.Add(new Tree(428, 128), g);
+            objectManager.Add(new Tree(428, 328), g);
+            objectManager.Add(new Tree(828, 628), g);
+            objectManager.Add(new Tree(898, 618), g);
+            objectManager.Add(new Tree(938, 678), g);
+            objectManager.Add(new Tree(958, 728), g);
+
+            objectManager.Add(new CopperOre(1258, 1128), g);
+            objectManager.Add(new CopperOre(1458, 1128), g);
+            objectManager.Add(new CopperOre(300, 1000), g);
+            objectManager.Add(new CopperOre(900, 1040), g);
+            objectManager.Add(new CopperOre(270, 900), g);
+
+            objectManager.Add(new TinOre(1900, 2840), g);
+            objectManager.Add(new TinOre(1270, 1600), g);
+            objectManager.Add(new TinOre(1470, 1620), g);
+
             objectManager.Add(new ItemEntity(528, 128, new Wood()), g);
             objectManager.Add(new ItemEntity(568, 128, new Stone()), g);
             objectManager.Add(new ItemEntity(608, 128, new Apple()), g);
             objectManager.Add(new CraftingTable(608, 628), g);
-            objectManager.Add(new Furnace(208, 328), g);
-            objectManager.Add(new Furnace(108, 328), g);
+            objectManager.Add(new Furnace(308, 528), g);
+            objectManager.Add(new Furnace(208, 528), g);
             objectManager.Add(new Chest(408, 798, new SpecializedSlotContainer(5, Item.ItemType.Food, 1, 5)), g);
             objectManager.Add(new Chest(608, 798), g);
             Chest largeChest = new Chest(698, 798, 16, 4, 4);
-            ItemContainer ic = new StackContainer(new List<Item>{new Wood(40), new Stone(8), new IronArrow(64), new MultiBow(), new IronSword(), new IronAxe() });
+            ItemContainer ic = new StackContainer(new List<Item>{new Wood(40), new Stone(8), new IronArrow(64), new MultiBow(), new IronSword(), new IronAxe(), new TwoHandSword(), new IronPickaxe() });
             largeChest.container.Add(ic);
             objectManager.Add(largeChest, g);
             Wood wood1 = new Wood();

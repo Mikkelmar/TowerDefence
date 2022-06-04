@@ -17,7 +17,8 @@ namespace TestGame.Objects.Entities.Creatures
 
         }
         public override void Update(GameTime gt, Game1 g)
-        { 
+        {
+            base.Update(gt, g);
             Player player = g.pageGame.GetPlayer();
             if (CanSee(player))
             {

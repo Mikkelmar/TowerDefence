@@ -14,7 +14,6 @@ namespace TestGame.Containers.Items.ItemTypes
         public Buildable(Sprite sprite, string name, int ammount = 1)
            : base(sprite, name, ammount)
         {
-            itemType = ItemType.Meltable;
             consumes = new StackContainer();
         }
 
@@ -32,9 +31,8 @@ namespace TestGame.Containers.Items.ItemTypes
             return false;
         }
 
-        public void Use(Entity user, float x, float y, GameTime gt, Game1 g, bool leftClick)
+        public void Update(Entity user, GameTime gt, Game1 g)
         {
-            throw new NotImplementedException();
         }
 
         public bool UseableOnClick(bool isLeftClick = true)

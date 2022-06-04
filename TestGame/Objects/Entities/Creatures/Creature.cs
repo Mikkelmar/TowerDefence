@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using TestGame.Containers.Items;
 using TestGame.Managers;
+using TestGame.Objects.Particles;
+using TestGame.Objects.StatusEffects;
 
 namespace TestGame.Objects.Entities.Creatures
 {
@@ -15,6 +17,7 @@ namespace TestGame.Objects.Entities.Creatures
         public String Name;
         public bool DamageAble = true;
         protected bool DisplayHealth = true;
+        private List<StatusEffect> StatusEffects = new List<StatusEffect>();
         public Creature(int x, int y, int w, int h, int id, Texture2D texture) : base(x, y, w, h, id, texture)
         {
             collision = true;
@@ -23,6 +26,12 @@ namespace TestGame.Objects.Entities.Creatures
         {
             base.Init(g);
             BaseHealth = Health;
+            BaseSpeed = Speed;
+        }
+        public override void Update(GameTime gt, Game1 g)
+        {
+            Speed = BaseSpeed;
+            UpdateStatusEffects(gt, g);
         }
         public abstract void Die(Game1 g);
         public void TakeDamage(int damage, Game1 g)
@@ -30,6 +39,7 @@ namespace TestGame.Objects.Entities.Creatures
             if (DamageAble)
             {
                 Health -= damage;
+                new DamageParticle(GetPosCenter(), damage).Spawn(g);
                 if (Health <= 0)
                 {
                     Die(g);
@@ -70,6 +80,25 @@ namespace TestGame.Objects.Entities.Creatures
         {
             return (i) => true;
         }
-
+        private void UpdateStatusEffects(GameTime gt, Game1 g)
+        {
+            List<StatusEffect> currentStatusEffects = new List<StatusEffect>(StatusEffects);
+            foreach (StatusEffect sf in currentStatusEffects)
+            {
+                sf.Affect(this, gt.ElapsedGameTime, g);
+            }
+        }
+        public void AddStatusEffect(StatusEffect se)
+        {
+            if (StatusEffects.Contains(se))
+            {
+                StatusEffects.Remove(se);
+            }
+            StatusEffects.Add(se);
+        }
+        public void RemoveStatusEffect(StatusEffect se)
+        {
+            StatusEffects.Remove(se);
+        }
     }
 }

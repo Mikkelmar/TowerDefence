@@ -29,6 +29,26 @@ namespace TestGame.Containers.Items
         {}
 
     }
+    public class CopperOreItem : MeltAble
+    {
+        public CopperOreItem(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(2, 9)),
+                "Copper ore",
+                new CopperIngot(),
+                ammount)
+        { }
+    }
+    public class TinOreItem : MeltAble
+    {
+        public TinOreItem(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(3, 9)),
+                "Tin ore",
+                new TinIngot(),
+                ammount)
+        { }
+    }
     public class Apple : Food
     {
         public Apple(int ammount = 1)
@@ -70,7 +90,36 @@ namespace TestGame.Containers.Items
                 "Iron",
                 ammount)
         {
-
+        }
+    }
+    public class CopperIngot : Item
+    {
+        public CopperIngot(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(4, 9)),
+                "Copper Ingot",
+                ammount)
+        {
+        }
+    }
+    public class TinIngot : Item
+    {
+        public TinIngot(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(0, 9)),
+                "Tin Ingot",
+                ammount)
+        {
+        }
+    }
+    public class BronzeIngot : Item
+    {
+        public BronzeIngot(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(1, 9)),
+                "Bronze Bar",
+                ammount)
+        {
         }
     }
     public class IronArrow : Arrow

@@ -24,6 +24,10 @@ namespace TestGame.Containers.Items
             ic = new StackContainer(new List<Item>(){
                 new Apple()});
             crafting1.Add(new Recepie(ic, new Iron(5)));
+
+            ic = new StackContainer(new List<Item>(){
+                new CopperIngot(), new TinIngot()});
+            crafting1.Add(new Recepie(ic, new BronzeIngot(2)));
         }
     }
 }

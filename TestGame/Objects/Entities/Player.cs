@@ -9,7 +9,6 @@ using TestGame.Graphics;
 using TestGame.Huds.ActiveHuds;
 using TestGame.Managers;
 using TestGame.Objects.Entities.Creatures;
-using TestGame.Objects.Entities.Structures;
 
 namespace TestGame.Objects
 {
@@ -18,26 +17,19 @@ namespace TestGame.Objects
         public SlotContainer inventory;
         //input
         KeyboardState kb;
-        public float walkSpeed = 370f;
         public bool canMove = true;
         private bool down = false;
         public int ActiveSlot = 0;
         private ItemContainer CurrentlyUsing;
-        public Player(int x, int y) : base(x, y, 28*3, 28*3, ObjectsID.player, Textures.player) 
+        public Player(int x, int y) : base(x, y, 28 * 3, 28 * 3, ObjectsID.player, Textures.player)
         {
+            Speed = 370f;
             Health = 10;
             DisplayHealth = false;
             collision = true;
-            this.hitbox = new Rectangle((int)Width/4, (int)(Height/3.5), (int)Width / 2, (int)(Height - Height / 3.5));
+            this.hitbox = new Rectangle((int)Width / 4, (int)(Height / 3.5), (int)Width / 2, (int)(Height - Height / 3.5));
         }
-        public void UseItem(Item item, float x, float y, GameTime gt, Game1 g, bool isLeftClick)
-        {
-            if(item is Containers.Items.ItemTypes.Useable)
-            {
-                ((Containers.Items.ItemTypes.Useable)item).Use(this, x, y, gt, g, isLeftClick);
-            }
-            
-        }
+ 
         public override void Destroy(Game1 g)
         {
             g.pageGame.mouseManager.Remove(this);
@@ -56,18 +48,27 @@ namespace TestGame.Objects
 
         public override void Update(GameTime gt, Game1 g)
         {
+            base.Update(gt, g);
+
             //input
             kb = Keyboard.GetState();
             MovmentInput(g);
             InteractInput(g);
+            UpdateIneventory(gt, g);
 
-            var mouseState = Mouse.GetState();
             if (canMove)
             {
                 //move
                 this.Move(new Vector2(X + xSpeed, Y + ySpeed), g);
             }
 
+        }
+        private void UpdateIneventory(GameTime gt, Game1 g){
+            Item holdingItem = inventory.GetItemAtSlot(ActiveSlot);
+            if (holdingItem is Useable && ((Useable)holdingItem).IsUsing())
+            {
+                ((Useable)holdingItem).Update(this, gt, g);
+            }
         }
         public override void Draw(Game1 g)
         {
@@ -97,10 +98,6 @@ namespace TestGame.Objects
             {
                 down = false;
             }
-            if (kb.IsKeyDown(Keys.R))
-            {
-                Debug.WriteLine(g.pageGame.mouseManager.mouseRightClickLisners.Count);
-            }
             setActiveSlot(new List<Keys>{ Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8 });
         }
         private void setActiveSlot(List<Keys> keys)
@@ -117,7 +114,7 @@ namespace TestGame.Objects
         }
         private void MovmentInput(Game1 g)
         {
-            float _speed = walkSpeed * Drawing.delta;
+            float _speed = Speed * Drawing.delta;
             // pressed
             if(kb.IsKeyDown(Keys.W)) { ySpeed = -_speed; }
             if(kb.IsKeyDown(Keys.S)) { ySpeed = _speed; }

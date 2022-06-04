@@ -37,9 +37,17 @@ namespace TestGame
             fps = (float)(1/delta);
             
         }
-        public static void DrawText(string text, float x, float y, float layerDepth=0.0001f)
+        public static void DrawText(string text, float x, float y, Game1 g, float layerDepth = 0.0001f, Color? color = null, float scale = 1f)
         {
-            _spriteBatch.DrawString(Textures.font, text, new Vector2(x, y), Color.White, 0.0f, new Vector2(0, 0), 1f, SpriteEffects.None, layerDepth);
+            DrawText(text, x - g.pageGame.cam.position.X, y - g.pageGame.cam.position.Y, layerDepth, color, scale);
+        }
+        public static void DrawText(string text, float x, float y, float layerDepth=0.0001f, Color? color = null, float scale = 1f)
+          {
+            if (color == null)
+            {
+                color = Color.White;
+            }
+            _spriteBatch.DrawString(Textures.font, text, new Vector2(x, y), (Color)color, 0.0f, new Vector2(0, 0), scale, SpriteEffects.None, layerDepth);
         }
         public static void FillRect(Rectangle bounds, Color col, float depth, Game1 g) 
         { 
