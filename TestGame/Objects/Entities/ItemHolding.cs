@@ -16,12 +16,10 @@ namespace TestGame.Objects.Entities
         protected Weapon item;
         protected Entity user;
         private List<Entity> objectsHit = new List<Entity>();
-        private float offSetX, offSetY;
+        protected float offSetX, offSetY;
         protected float startRotation, rotation;
         protected TimeSpan currentTime = new TimeSpan();
         public ItemHolding(int x, int y, int w, int h, Weapon item, float startRotation) : base(x, y, w, h, 0, item.Sprite) {
-            offSetX = 0;
-            offSetY = 0;
             collision = false;
             this.item = item;
             //rotation = (float)Math.Atan2(Direction.Y, Direction.X);
@@ -49,7 +47,7 @@ namespace TestGame.Objects.Entities
         }
         protected virtual void checkForHits(Game1 g)
         {
-            List<GameObject> entities = g.pageGame.objectManager.GetAllObjectsWith(
+            List<GameObject> entities = g.pageGame.getObjectManager().GetAllObjectsWith(
                (o) => (o is Entity) && 
                 (o is Destructable) && 
                 ((Destructable)o).CanDestroy()(item) && 
@@ -79,7 +77,7 @@ namespace TestGame.Objects.Entities
         public override Rectangle GetHitbox()
         {
             Vector2 hitPos = new Vector2((float)Math.Cos(rotation+(Math.PI/8)), (float)Math.Sin(rotation + (Math.PI / 8)));
-            return new Rectangle((int)(X - hitPos.X*64- Width/2), (int)(Y - hitPos.Y*64-Height/2), (int)Width, (int)Height); ;
+            return new Rectangle((int)(X - hitPos.X*16- Width/2), (int)(Y - hitPos.Y*16-Height/2), (int)Width, (int)Height); ;
         }
         protected virtual void checkIfDoneAttacking(GameTime gt, Game1 g)
         {
@@ -87,12 +85,12 @@ namespace TestGame.Objects.Entities
             if(currentTime > item.WeaponSpeed)
             {
                 item.DoneUsing();
-                g.pageGame.objectManager.Remove(this, g);
+                g.pageGame.getObjectManager().Remove(this, g);
             }
         }
         public override void Draw(Game1 g)
         {
-            //Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);
+            Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);
             item.Sprite.Draw(position, Width, Height, depth, rotation, new Vector2(16,16));
         }
 

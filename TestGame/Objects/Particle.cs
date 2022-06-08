@@ -25,7 +25,7 @@ namespace TestGame.Objects
         {}
         public void Spawn(Game1 g)
         {
-            g.pageGame.objectManager.Add(this, g);
+            g.pageGame.getObjectManager().Add(this, g);
         }
 
         public override void Draw(Game1 g)
@@ -45,7 +45,7 @@ namespace TestGame.Objects
             Duration -= gt.ElapsedGameTime;
             if(Duration.Ticks <= 0)
             {
-                g.pageGame.objectManager.Remove(this, g);
+                g.pageGame.getObjectManager().Remove(this, g);
             }
         }
     }

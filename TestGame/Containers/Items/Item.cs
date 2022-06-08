@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,11 +10,10 @@ namespace TestGame.Containers.Items
     {
         public Sprite Sprite;
         public enum ItemType { Weapon, Food, Fuel, Meltable, Misc, Armour,
-            Arrow
+            Arrow, Helmet, Chest, Legs, Feet
         }
         public string Name { get; }
         public ItemType itemType;
-        public string Description;
         public int Ammount { get; set; }
         public Item(Sprite texture, String name, int ammount = 1)
         {
@@ -33,7 +31,7 @@ namespace TestGame.Containers.Items
             Sprite.Draw(new Vector2(x, y), size, layerDepth: depth);
             if (Ammount != 1 && showAmmount) //displayer kun antall hvis det ikke er kun 1
             {
-                Drawing.DrawText(Ammount.ToString(), x + 40, y + 40, depth * 0.5f);
+                Drawing.DrawText(Ammount.ToString(), x + 40, y + 40, depth * 0.999f);
             }
         }
         public void Draw(Vector2 pos, int size = 64, float depth = 0.01f, bool showAmmount = true)
@@ -47,7 +45,10 @@ namespace TestGame.Containers.Items
         }
         public virtual Item Clone()
         {
-            return (Item)Activator.CreateInstance(this.GetType(), this.Ammount);
+            //TODO: er noe muffins med item logic, mistenker feilen ligger her
+            //Item clonedItem = (Item)Activator.CreateInstance(this.GetType(), Ammount);
+            //clonedItem.Ammount = Ammount;
+            return (Item)Activator.CreateInstance(this.GetType(), Ammount);
         }
 
         //TODO: Bør bruke noe annet en navn, helst lage et ID system eller noe
@@ -63,6 +64,10 @@ namespace TestGame.Containers.Items
         {
             return Name + ": [Ammount: "+Ammount+", Type: "+itemType+"]";
         }
-  
+        public virtual List<string> GetDescription()
+        {
+            List<string> newList = new List<string>();
+            return newList;
+        }
     }
 }

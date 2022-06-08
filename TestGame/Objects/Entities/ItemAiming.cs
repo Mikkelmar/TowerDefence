@@ -27,7 +27,7 @@ namespace TestGame.Objects.Entities
         {
             MouseState mouseState = Mouse.GetState();
             //rotation = (float)((float)(-Math.Atan2(mouseState.X - user.GetPosCenter().X, mouseState.Y - user.GetPosCenter().Y)));
-            rotation = (float)((float)(Math.Atan2((mouseState.Y + g.pageGame.cam.position.Y) - user.GetPosCenter().Y, (mouseState.X + g.pageGame.cam.position.X) - user.GetPosCenter().X)) - (Math.PI)- (Math.PI/4));
+            rotation = (float)((float)(Math.Atan2((mouseState.Y + g.gameCamera.Position.Y) - user.GetPosCenter().Y, (mouseState.X + g.gameCamera.Position.X) - user.GetPosCenter().X)) - (Math.PI)- (Math.PI/4));
             //rotation = (float)(rotation - (Math.PI / 4) + Math.PI);
         }
 

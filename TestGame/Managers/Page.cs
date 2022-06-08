@@ -7,8 +7,7 @@ namespace TestGame.Managers
 {
     public abstract class Page
     {
-        public ObjectManager objectManager { get; } = new ObjectManager();
-   
+
         public int id;
         public Page(int id)
         {
@@ -17,6 +16,7 @@ namespace TestGame.Managers
         
         public abstract void Init(Game1 g);
         public abstract void Update(GameTime gt, Game1 g);
-        public abstract void Draw( Game1 g);
+        public abstract void Draw(Game1 g);
+        public abstract void DrawUI(Game1 g);
     }
 }

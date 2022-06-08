@@ -14,14 +14,14 @@ namespace TestGame.Objects.Entities.Structures
     {
         private TimeSpan? shakeTime;
         private int baseX, baseY;
-        public Tree(int x, int y) : base(x, y, 16*3*3, 16*4*3)
+        public Tree(int x, int y) : base(x, y, 16*3, 16*4)
         {
             hp = 30;
             basehp = hp;
             baseX = x;
             baseY = y;
-            this.sprite = new Sprite(Textures.spriteSheet_1, new Rectangle(24 * 16, 0, 16 * 3, 16 * 4));
-            this.hitbox = new Rectangle(16*3, 16*3*3, 16*3, 16*3);
+            sprite = new Sprite(Textures.spriteSheet_1, new Rectangle(24 * 16, 0, 16 * 3, 16 * 4));
+            hitbox = new Rectangle(16, 32, 16, 16);
             drop = new Wood(5);
         }
 
@@ -46,8 +46,8 @@ namespace TestGame.Objects.Entities.Structures
         private void shake(GameTime gt)
         {
             Random rand = new Random();
-            X += (float)(rand.Next(5) - 2)/10;
-            Y += (float)(rand.Next(5) - 2)/10;
+            X += (float)(rand.Next(5) - 2)/40;
+            Y += (float)(rand.Next(5) - 2)/40;
             shakeTime -= gt.ElapsedGameTime;
             if(((TimeSpan)shakeTime).Ticks <= 0)
             {

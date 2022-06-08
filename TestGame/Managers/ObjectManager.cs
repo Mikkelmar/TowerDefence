@@ -1,14 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TestGame.Objects.Entities.Structures;
 
 namespace TestGame.Managers
 {
     public class ObjectManager
     {
         public List<GameObject> gameObjects = new List<GameObject>();
-
+        
         public void Update(GameTime gt, Game1 g)
         {
             for(var i = 0; i < gameObjects.Count;i++)
@@ -33,6 +35,7 @@ namespace TestGame.Managers
                 
             }
         }
+        
         public bool Intersect(Rectangle newPos)
         {
             foreach (GameObject obj in gameObjects)
@@ -93,6 +96,7 @@ namespace TestGame.Managers
             return new Vector2(from.GetPosCenter().X - to.GetPosCenter().X, from.GetPosCenter().Y - to.GetPosCenter().Y);
         }
         public void Add(GameObject obj, Game1 g) { gameObjects.Add(obj); obj.Init(g); }
+        public void Add(GameObject obj) { gameObjects.Add(obj);}
         public void Remove(GameObject obj, Game1 g) { 
             if(obj != null)
             {

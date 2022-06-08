@@ -15,7 +15,6 @@ namespace TestGame.Containers.Items.ItemTypes.ItemList
         {
             Damage = 7;
             WeaponSpeed = new TimeSpan(0, 0, 0, 0, 400);
-            Init();
         }
     }
 }

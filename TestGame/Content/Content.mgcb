@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\packages\MonoGame.Extended.Content.Pipeline.0.6.372\tools\MonoGame.Extended.Content.Pipeline.dll
+/reference:..\..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\3.8.0\tools\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -25,6 +25,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:!CL_DEMO.png
+
+#begin armourSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:armourSheet.png
 
 #begin CopperOre.png
 /importer:TextureImporter
@@ -137,7 +149,9 @@
 /build:inventory.png
 
 #begin Island.tmx
-/copy:Island.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:Island.tmx
 
 #begin itemContainer.png
 /importer:TextureImporter
@@ -163,8 +177,27 @@
 /processorParam:TextureFormat=Color
 /build:itemContainerTransparent.png
 
-#begin map2.tmx
-/copy:map2.tmx
+#begin maps/!CL_DEMO.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/!CL_DEMO.png
+
+#begin maps/Home.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/Home.tmx
+
+#begin maps/Island.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/Island.tmx
 
 #begin melting.png
 /importer:TextureImporter
@@ -214,6 +247,18 @@
 /processorParam:TextureFormat=Color
 /build:selected.png
 
+#begin shadow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:shadow.png
+
 #begin Sheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -249,6 +294,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tinOre.png
+
+#begin world2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:world2.tmx
 
 #begin zombieAcrher.png
 /importer:TextureImporter

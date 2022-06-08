@@ -13,7 +13,6 @@ namespace TestGame.Containers.Items.ItemTypes.ItemList
                 "Iron sword",
                 ammount)
         {
-            Init();
         }
     }
 }

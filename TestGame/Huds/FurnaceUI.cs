@@ -31,7 +31,7 @@ namespace TestGame.Huds.ActiveHuds
         Add(new ItemDisplayer(furnace.FuelContailer, furnace.FuelContailer.Xrows, furnace.FuelContailer.Yrows,  Width - 180, 400, g));
         Add(new ItemDisplayer(furnace.FinishedContainer, furnace.FinishedContainer.Xrows, furnace.FinishedContainer.Yrows, Width - 10, 210, g));
         Add(new ItemDisplayer(furnace.MeltingContainer, furnace.MeltingContainer.Xrows, furnace.MeltingContainer.Yrows, Width - 180, 210, g));
-
+        Add(new ArmourDisplayer(g.pageGame.player.Wearing, new Vector2(X + 9 * 4, Y + 15 * 4), g));
         }
         public override void Draw(Game1 g)
     {
@@ -40,7 +40,7 @@ namespace TestGame.Huds.ActiveHuds
             //TODO lmao fix this fire animation
             int fireCrop = (int)(32 * furnace.GetFirePercentLeft());
 
-            Rectangle firePos = new Rectangle(Width - 595, 680-(int)(128 * furnace.GetFirePercentLeft()), 128, (int)(128*furnace.GetFirePercentLeft()));
+            Rectangle firePos = new Rectangle((int)(Width - 193 + g.gameCamera.Position.X), 410-(int)(128 * furnace.GetFirePercentLeft() - g.gameCamera.Position.Y), 128, (int)(128*furnace.GetFirePercentLeft()));
             
             fire.Draw(firePos, (float)(depth * 0.1), 
                 new Rectangle(0, 32 - fireCrop, 32, fireCrop)

@@ -24,7 +24,7 @@ namespace TestGame.Objects.Entities.Buildings
         public override void Init(Game1 g)
         {
             base.Init(g);
-            g.pageGame.mouseManager.AddRight(this, true);
+            g.pageGame.mouseManager.AddRight(this, false);
 
         }
         public override void Destroy(Game1 g)

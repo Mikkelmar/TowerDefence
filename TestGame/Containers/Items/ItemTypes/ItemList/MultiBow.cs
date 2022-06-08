@@ -16,7 +16,6 @@ namespace TestGame.Containers.Items.ItemList
                 "Triple Bow",
                 ammount)
         {
-            Init();
         }
         protected override void Attack(float x, float y, Game1 g)
         {

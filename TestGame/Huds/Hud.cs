@@ -19,8 +19,8 @@ namespace TestGame.Huds
             float cx = 0, cy = 0;
             if (relative)
             {
-                cx = g.pageGame.cam.position.X;
-                cy = g.pageGame.cam.position.Y;
+                cx = g.gameCamera.Position.X;
+                cy = g.gameCamera.Position.Y;
             }
             return new Vector2(X + cx, Y + cy);
         }
@@ -29,8 +29,8 @@ namespace TestGame.Huds
             float cx = 0, cy = 0;
             if (relative)
             {
-                cx = g.pageGame.cam.position.X;
-                cy = g.pageGame.cam.position.Y;
+                cx = g.gameCamera.Position.X;
+                cy = g.gameCamera.Position.Y;
             }
             return new Rectangle(
                 (int)(X + cx),

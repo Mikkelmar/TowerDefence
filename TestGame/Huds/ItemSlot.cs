@@ -17,13 +17,21 @@ namespace TestGame.Huds
         private Sprite slot;
         private bool beingHovred = false;
         private float mouseX, mouseY;
-        public ItemSlot(int slotID, SlotContainer inContainer)
+        public ItemSlot(int slotID, SlotContainer inContainer, Sprite sprite = null)
         {
             this.slotID = slotID;
             this.inContainer = inContainer;
-            this.slot = new Sprite(Textures.slot);
+            if(sprite == null)
+            {
+                slot = new Sprite(Textures.slot);
+            }
+            else
+            {
+                slot = sprite;
+            }
+            
         }
-        public ItemSlot(int slotID, SlotContainer inContainer, Vector2 pos, float depth, int size = 64) : this(slotID, inContainer)
+        public ItemSlot(int slotID, SlotContainer inContainer, Vector2 pos, float depth, int size = 64, Sprite sprite = null) : this(slotID, inContainer, sprite)
         {
             X = pos.X;
             Y = pos.Y;
@@ -34,7 +42,7 @@ namespace TestGame.Huds
         
         public void Clicked(float x, float y, Game1 g)
         {
-            if(new Rectangle((int)X, (int)Y, Width, Height).Contains(new Point((int)x, (int)y)))
+            if(GetRectangle(g).Contains(new Point((int)x, (int)y)))
             {
                 Item holding = g.pageGame.hudManager.Holding;
                 Item itemAtSlot = inContainer.GetItemAtSlot(slotID);
@@ -71,7 +79,7 @@ namespace TestGame.Huds
 
         public override void Draw(Game1 g)
         {
-            Vector2 CurrentPos = new Vector2((int)X + g.pageGame.cam.position.X, (int)Y + g.pageGame.cam.position.Y);
+            Vector2 CurrentPos = new Vector2((int)X + g.gameCamera.Position.X, (int)Y + g.gameCamera.Position.Y);
             slot.Draw(CurrentPos, (depth * 0.6f), 4);
             if(inContainer.GetItemAtSlot(slotID) != null)
             {
@@ -86,7 +94,7 @@ namespace TestGame.Huds
 
         public void Hover(float x, float y, Game1 g)
         {
-            if (new Rectangle((int)X, (int)Y, Width, Height).Contains(new Point((int)x, (int)y)))
+            if (GetRectangle(g).Contains(new Point((int)x, (int)y)))
             {
                 beingHovred = true;
                 mouseX = x;
@@ -99,7 +107,7 @@ namespace TestGame.Huds
 
         public void RightClicked(float x, float y, Game1 g)
         {
-            if (new Rectangle((int)X, (int)Y, Width, Height).Contains(new Point((int)x, (int)y)))
+            if (GetRectangle(g).Contains(new Point((int)x, (int)y)))
             {
                 Item holding = g.pageGame.hudManager.Holding;
                 Item itemAtSlot = inContainer.GetItemAtSlot(slotID);

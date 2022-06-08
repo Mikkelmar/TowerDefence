@@ -10,7 +10,7 @@ namespace TestGame.Huds
 
         public CraftingList()
         {
-            this.X = 100;
+            this.X = 200;
             this.Y = 100;
             this.Width = 239*4;
             this.Height = 104*4;

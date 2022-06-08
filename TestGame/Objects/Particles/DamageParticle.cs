@@ -22,21 +22,21 @@ namespace TestGame.Objects.Particles
         {
             if (ammount == 0)
             {
-                return 1f;
+                return 0.2f;
             }
             if (ammount < 3)
             {
-                return 1.1f;
+                return 0.3f;
             }
             if (ammount < 5)
             {
-                return 1.3f;
+                return 0.4f;
             }
             if (ammount < 8)
             {
-                return 1.4f;
+                return 0.5f;
             }
-            return 1f;
+            return 0.2f;
         }
         private Color getColor()
         {

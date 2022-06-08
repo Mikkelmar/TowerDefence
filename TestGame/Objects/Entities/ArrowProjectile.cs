@@ -21,7 +21,7 @@ namespace TestGame.Objects.Entities
         private Arrow ArrowItem;
         private bool DropProjectile;
         private TimeSpan deSpawn = new TimeSpan(0,0,30);
-        public ArrowProjectile(float x, float y, Sprite sprite, int Damage, float Speed, Vector2 Direction, Creature caster, Arrow arrow, float Knockback = 150, bool DropProjectile = true) : base((int)x, (int)y, 32, 32, 0, sprite)
+        public ArrowProjectile(float x, float y, Sprite sprite, int Damage, float Speed, Vector2 Direction, Creature caster, Arrow arrow, float Knockback = 150, bool DropProjectile = true) : base((int)x, (int)y, 8, 8, 0, sprite)
         {
             this.Damage = Damage;
             this.Speed = Speed;
@@ -43,7 +43,7 @@ namespace TestGame.Objects.Entities
 
             if(deSpawn.Ticks <= 0)
             {
-                g.pageGame.objectManager.Remove(this, g);
+                g.pageGame.getObjectManager().Remove(this, g);
             }
 
         }
@@ -55,14 +55,14 @@ namespace TestGame.Objects.Entities
 
                 ((Creature)obj).AddStatusEffect(new Knockback(-Direction, Knockback, new TimeSpan(0, 0, 0, 0, 120)));
 
-                g.pageGame.objectManager.Remove(this, g);
+                g.pageGame.getObjectManager().Remove(this, g);
             }
             else
             {
                 if (DropProjectile)
                 {
-                    g.pageGame.objectManager.Add(new ItemEntity((int)X, (int)Y, ArrowItem), g);
-                    g.pageGame.objectManager.Remove(this, g);
+                    g.pageGame.getObjectManager().Add(new ItemEntity((int)X, (int)Y, ArrowItem), g);
+                    g.pageGame.getObjectManager().Remove(this, g);
                 }
             }
             Speed = 0;
@@ -70,7 +70,7 @@ namespace TestGame.Objects.Entities
         public override void Move(Vector2 newPos, Game1 g)
         {
             Vector2 nextPos = new Vector2(this.X, this.Y);
-            GameObject hitTarget = g.pageManager.GetPage().objectManager.CanMove(this,
+            GameObject hitTarget = g.pageGame.getObjectManager().CanMove(this,
                 new Rectangle(
                     (int)newPos.X + hitbox.X,
                     (int)this.Y + hitbox.Y,
@@ -88,7 +88,7 @@ namespace TestGame.Objects.Entities
                 Hit(hitTarget, g);
                 return;
             }
-             hitTarget = g.pageManager.GetPage().objectManager.CanMove(this,
+             hitTarget = g.pageGame.getObjectManager().CanMove(this,
                 new Rectangle(
                     (int)this.X + hitbox.X,
                     (int)newPos.Y + hitbox.Y,

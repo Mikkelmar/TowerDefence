@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,7 @@ namespace TestGame.Huds.ActiveHuds
             CraftingList craftingList = new CraftingList();
             
             Add(craftingList);
-
+            Add(new ArmourDisplayer(g.pageGame.player.Wearing, new Vector2(craftingList.X + 9 * 4, craftingList.Y + 15 * 4), g));
             int index = 0;
             foreach(Recepie r in CraftingRecepies.crafting1)
             {
@@ -26,7 +27,7 @@ namespace TestGame.Huds.ActiveHuds
                 index++;
             }
 
-            itemDisplayer = new ItemDisplayer(g.pageGame.player.inventory, 8, 5, 220, 140, g);
+            itemDisplayer = new ItemDisplayer(g.pageGame.player.inventory, 8, 5, 310, 140, g);
             Add(itemDisplayer);
         }
     }

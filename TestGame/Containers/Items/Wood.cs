@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using TestGame.Containers.Items.ItemTypes;
 using TestGame.Graphics;
+using TestGame.Objects.Entities.Creatures;
 
 namespace TestGame.Containers.Items
 {
@@ -71,15 +73,63 @@ namespace TestGame.Containers.Items
 
         }
     }
-    public class IronHelmet : Item
+    public class FineBow : BowItem
+    {
+        public FineBow(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(13, 2)),
+                "Fine Bow",
+                ammount,
+                KnockBack: 200)
+        {
+        }
+    }
+    public class IronHelmet : Armour
     {
         public IronHelmet(int ammount = 1)
             : base(
                 new Sprite(Textures.spriteSheet_2, getSpriteRect(4, 5)),
                 "Iron Helmet",
+                2,
                 ammount)
         {
-
+            itemType = ItemType.Helmet;
+        }
+    }
+    public class BronzeChestPlate : Armour
+    {
+        public BronzeChestPlate(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(3, 7)),
+                "Bronze Chestplate",
+                5,
+                ammount)
+        {
+            itemType = ItemType.Chest;
+        }
+    }
+    public class LeatherBoots : Armour
+    {
+        private float speedBoost = 0.25f; // 25% Percent
+        public LeatherBoots(int ammount = 1)
+            : base(
+                new Sprite(Textures.spriteSheet_2, getSpriteRect(0, 6)),
+                "Leather Boots",
+                1,
+                ammount)
+        {
+            itemType = ItemType.Feet;
+        }
+        public override void Wearing(Creature creature, Game1 g)
+        {
+            //base.Wearing(creature, g);
+            creature.Speed += creature.Speed * speedBoost;
+        }
+        public override List<string> GetDescription()
+        {
+            List<string> desc = base.GetDescription();
+            desc.Add("+"+(speedBoost * 100) + "% speed boost");
+            return desc;
         }
     }
     public class Iron : Item

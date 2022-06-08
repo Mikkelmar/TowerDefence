@@ -30,7 +30,7 @@ namespace TestGame.Managers
                 if(Holding != null)
                 {
                     Vector2 pos = MouseManager.GetMousePos();
-                    pos += g.pageGame.cam.position;
+                    pos += g.gameCamera.Position;
                     Holding.Draw(pos, 64, 0);
                 }
             }
@@ -51,7 +51,7 @@ namespace TestGame.Managers
                 activeUI.Destroy(g);
                 if(Holding != null)
                 {
-                    g.pageGame.objectManager.Add(new ItemEntity((int)g.pageGame.player.X, (int)g.pageGame.player.Y, Holding), g);
+                    g.pageGame.getObjectManager().Add(new ItemEntity((int)g.pageGame.player.GetPosCenter().X, (int)g.pageGame.player.GetPosCenter().Y, Holding), g);
                     Holding = null;
                 }
             }

@@ -12,12 +12,13 @@ namespace TestGame.Objects.Entities.Creatures
     public class ZombieArcher : Hostile
     {
         private BowItem bow;
-        public ZombieArcher(int x, int y, int w=100, int h= 100) : base(x, y, w, h, 3, Textures.zombieAcrher)
+        public ZombieArcher(int x, int y, int w=20, int h= 20) : base(x, y, w, h, 3, Textures.zombieAcrher)
         {
-            this.Speed = 140;
+            this.Speed = 20;
             this.Health = 20;
             this.Name = "ZombieArcher";
             bow = new Bow();
+            bow.Damage = 6;
             this.loot = new MultiBow();
         }
         public override void Update(GameTime gt, Game1 g)
@@ -25,7 +26,7 @@ namespace TestGame.Objects.Entities.Creatures
             base.Update(gt, g);
             if (CanAttack())
             {
-                if(CanSee(g.pageGame.player, 500)){
+                if(CanSee(g.pageGame.player, 150)){
                     Attack(g);
                 }
             }
@@ -44,15 +45,15 @@ namespace TestGame.Objects.Entities.Creatures
         private void HandleMovment(Game1 g)
         {
             Player player = g.pageGame.GetPlayer();
-            if (player.DistanceTo(GetPosCenter()) <= 500)
+            if (player.DistanceTo(GetPosCenter()) <= 120)
             {
                 float _speed = Speed * Drawing.delta;
 
-                if (player.DistanceTo(GetPosCenter()) <= 300)
+                if (player.DistanceTo(GetPosCenter()) <= 40)
                 {
                     _speed *= -1;
                 }
-                else if (player.DistanceTo(this.position) <= 400)
+                else if (player.DistanceTo(this.position) <= 90)
                 {
                     return;
                 }

@@ -8,10 +8,16 @@ namespace TestGame.Managers
     public abstract class GameObject
     {
         //dimensions
-        public float X, Y;
+        public float X;
+        public float Y;// { get { return Y; } set { Y = Y; } }
         public float xSpeed, ySpeed;
         public float Width, Height;
-        public float depth = 0.005f;
+
+        //Default depth value for all objects. All game objects should be around this value
+        private float _depth = 0.005f;
+        //Returns value accounted for y value to the object.
+        //this method may not be optimal if the Y cordinate reaches a high enough value to surpass other layers
+        public float depth { get { return (1 / (Y+Height)) * _depth; }set { _depth = value; } }
 
         public Vector2 position { get { return new Vector2(X, Y); } set { X = value.X; Y = value.Y; } }
         public Vector2 speed { get { return new Vector2(xSpeed, ySpeed); } set { xSpeed = value.X; ySpeed = value.Y; } }
@@ -48,10 +54,10 @@ namespace TestGame.Managers
         
 
         // asbtracts
-        public abstract void Init(Game1 g);
         public abstract void Destroy(Game1 g);
         public abstract void Update(GameTime gt, Game1 g);
         public abstract void Draw(Game1 g);
+        public abstract void Init(Game1 g);
 
         // sets
         public void SetPosition(float x, float y) { this.X = x; this.Y = y; }
@@ -77,5 +83,6 @@ namespace TestGame.Managers
         {
             return GetHitbox().Contains(point.ToPoint());
         }
+        
     }
 }

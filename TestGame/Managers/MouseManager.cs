@@ -22,6 +22,12 @@ namespace TestGame.Managers
         public void Update(GameTime gt, Game1 g)
         {
             MouseState newState = Mouse.GetState();
+
+            g.gameCamera.Zoom = 1f;
+            Vector2 _worldPosition = g.gameCamera.ScreenToWorld(new Vector2(newState.X, newState.Y));
+            g.gameCamera.Zoom = (g.pageGame.cam.Zoom);
+
+            Vector2 _worldPositionZoomed = g.gameCamera.ScreenToWorld(new Vector2(newState.X, newState.Y));
             if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
                 // do something here
@@ -31,29 +37,28 @@ namespace TestGame.Managers
                 {
                     if (mouseLeftClickLisners[lisner])
                     {
-                        lisner.Clicked(newState.X + g.pageGame.cam.position.X, newState.Y + g.pageGame.cam.position.Y, g);
+                        lisner.Clicked(_worldPosition.X, _worldPosition.Y, g);
                     }
                     else
                     {
-                        lisner.Clicked(newState.X, newState.Y, g);
+                        lisner.Clicked(_worldPositionZoomed.X, _worldPositionZoomed.Y, g);
                     }
                     
                 }
             }
             else if (newState.LeftButton == ButtonState.Released && oldState.LeftButton == ButtonState.Pressed)
             {
-                // do something here
 
                 List<LeftRelease> lisners = new List<LeftRelease>(mouseLeftReleaseLisners.Keys);
                 foreach (LeftRelease lisner in lisners)
                 {
                     if (mouseLeftReleaseLisners[lisner])
                     {
-                        lisner.LeftReleased(newState.X + g.pageGame.cam.position.X, newState.Y + g.pageGame.cam.position.Y, g);
+                        lisner.LeftReleased(_worldPosition.X, _worldPosition.Y, g);
                     }
                     else
                     {
-                        lisner.LeftReleased(newState.X, newState.Y, g);
+                        lisner.LeftReleased(_worldPositionZoomed.X, _worldPositionZoomed.Y, g);
                     }
 
                 }
@@ -66,11 +71,11 @@ namespace TestGame.Managers
                     if(mouseRightClickLisners.ContainsKey(lisner)){ 
                         if (mouseRightClickLisners[lisner])
                         {
-                            lisner.RightClicked(newState.X + g.pageGame.cam.position.X, newState.Y + g.pageGame.cam.position.Y, g);
+                            lisner.RightClicked(_worldPosition.X, _worldPosition.Y, g);
                         }
                         else
                         {
-                            lisner.RightClicked(newState.X, newState.Y, g);
+                            lisner.RightClicked(_worldPositionZoomed.X, _worldPositionZoomed.Y, g);
                         }
                     }
 
@@ -85,19 +90,19 @@ namespace TestGame.Managers
                 {
                     if (hoverLisners[lisner])
                     {
-                        lisner.Hover(newState.X + g.pageGame.cam.position.X, newState.Y + g.pageGame.cam.position.Y, g);
+                        lisner.Hover(_worldPosition.X, _worldPosition.Y, g);
                     }
                     else
                     {
-                        lisner.Hover(newState.X, newState.Y, g);
+                        lisner.Hover(_worldPositionZoomed.X, _worldPositionZoomed.Y, g);
                     }
                 }
             }
         }
         public static Vector2 GetMousePos()
         {
-            MouseState newState = Mouse.GetState();
-            return new Vector2(newState.X, newState.Y);
+            MouseState state = Mouse.GetState();
+            return new Vector2(state.X, state.Y);
         }
      
         public void Add(Clickable obj, bool relative = false) { mouseLeftClickLisners.Add(obj, relative);}

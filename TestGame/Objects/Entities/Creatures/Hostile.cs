@@ -47,9 +47,9 @@ namespace TestGame.Objects.Entities.Creatures
         {
             if(loot != null)
             {
-                g.pageManager.GetPage().objectManager.Add(new ItemEntity((int)this.X, (int)this.Y, loot.Clone()), g);
+                g.pageGame.getObjectManager().Add(new ItemEntity((int)this.X, (int)this.Y, loot.Clone()), g);
             }
-            g.pageManager.GetPage().objectManager.Remove(this, g);
+            g.pageGame.getObjectManager().Remove(this, g);
         }
 
         public override void Init(Game1 g)

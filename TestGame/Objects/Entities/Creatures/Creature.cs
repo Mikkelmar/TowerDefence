@@ -13,6 +13,7 @@ namespace TestGame.Objects.Entities.Creatures
     public abstract class Creature : Entity, Destructable
     {
         public int Health=5, BaseHealth;
+        public int Armour;
         public float Speed, BaseSpeed;
         public String Name;
         public bool DamageAble = true;
@@ -21,6 +22,7 @@ namespace TestGame.Objects.Entities.Creatures
         public Creature(int x, int y, int w, int h, int id, Texture2D texture) : base(x, y, w, h, id, texture)
         {
             collision = true;
+            haveShadow = true;
         }
         public override void Init(Game1 g)
         {
@@ -38,13 +40,19 @@ namespace TestGame.Objects.Entities.Creatures
         {
             if (DamageAble)
             {
-                Health -= damage;
-                new DamageParticle(GetPosCenter(), damage).Spawn(g);
+                int finalDamage = CalculateDamage(damage);
+                Health -= finalDamage;
+                new DamageParticle(GetPosCenter(), finalDamage).Spawn(g);
                 if (Health <= 0)
                 {
                     Die(g);
                 }
             }  
+        }
+        protected virtual int CalculateDamage(int damage)
+        {
+            double damageMultiplier = damage / ((double)Armour+damage);
+            return (int)Math.Round(damage * damageMultiplier);
         }
         public override void Draw(Game1 g)
         {
@@ -52,20 +60,20 @@ namespace TestGame.Objects.Entities.Creatures
             base.Draw(g);
             if (DisplayHealth)
             {
-                Drawing.FillRect(new Rectangle((int)GetPosCenter().X - 32, (int)Y - 16, 32*2, 16), Color.Red, depth*0.0001f, g);
-                Drawing.FillRect(new Rectangle((int)GetPosCenter().X - 32, (int)Y - 16, (int)((32 * 2)*((float)Health /BaseHealth)), 16), Color.LawnGreen, depth * 0.00001f, g);
+                Drawing.FillRect(new Rectangle((int)GetPosCenter().X - 8, (int)Y - 4, 16, 4), Color.Red, depth*0.0001f, g);
+                Drawing.FillRect(new Rectangle((int)GetPosCenter().X - 8, (int)Y - 4, (int)((16)*((float)Health /BaseHealth)), 4), Color.LawnGreen, depth * 0.00001f, g);
             }
         }
         protected void MoveTowards(GameObject obj, Game1 g, float moveSpeed)
         {
-            Vector2 dir = g.pageGame.objectManager.FromToDir(this, obj);
+            Vector2 dir = g.pageGame.getObjectManager().FromToDir(this, obj);
             this.Move(new Vector2(X + (-moveSpeed * dir.X / dir.Length()), Y + (-moveSpeed * dir.Y / dir.Length())), g);
         }
         protected void MoveAwayFrom(GameObject obj, Game1 g, float moveSpeed)
         {
             MoveTowards(obj, g, -moveSpeed);
         }
-        protected bool CanSee(GameObject obj, int range = 300)
+        protected bool CanSee(GameObject obj, int range = 100)
         {
             //TODO: expand on how this works
             //rn tar den kun avtaden som en faktor

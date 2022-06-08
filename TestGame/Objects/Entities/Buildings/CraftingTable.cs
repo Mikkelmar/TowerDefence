@@ -8,9 +8,10 @@ namespace TestGame.Objects.Entities.Buildings
 {
     public class CraftingTable : Building
     {
-        public CraftingTable(int x, int y) : base(x, y, 16*6, 16 * 6, 4, new Sprite(Textures.spriteSheet_1, new Rectangle(24 * 16, 16 * 13, 32, 32)))
+        public CraftingTable(int x, int y) : base(x, y, 32, 32, 4, new Sprite(Textures.spriteSheet_1, new Rectangle(24 * 16, 16 * 13, 32, 32)))
         {
             this.solid = true;
+            //hitbox = new Rectangle(0, 40, 90, 50);
         }
         
         public override void Update(GameTime gt, Game1 g)

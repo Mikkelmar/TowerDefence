@@ -1,5 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGame.Extended.Tiled;
+using MonoGame.Extended.Tiled.Renderers;
+using MonoGame.Extended.ViewportAdapters;
+using System.Diagnostics;
 using TestGame.Graphics;
 using TestGame.Managers;
 using TestGame.Pages;
@@ -10,13 +16,12 @@ namespace TestGame
     public class Game1 : Game
     {
 
-        //private TiledMap map;
-        //private TiledMapRenderer mapRender;
-        public TmxMap Map;
+     
 
         // page
         public PageManager pageManager { get; private set; } = new PageManager();
         public PageGame pageGame;
+        public OrthographicCamera gameCamera;
 
         public Game1()
         {
@@ -39,11 +44,19 @@ namespace TestGame
             // window
             IsFixedTimeStep = false;
             Window.Title = Drawing.TITLE;
-            
 
             //init pages
             pageManager.Add(pageGame, this);
             pageManager.Set(pageGame);
+
+            //init camera
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, Drawing.WINDOW_WIDTH, Drawing.WINDOW_HEIGHT);
+            gameCamera = new OrthographicCamera(viewportadapter);
+            gameCamera.Zoom = pageGame.cam.Zoom;
+           
+
+
+
         }
 
         protected override void LoadContent()
@@ -51,7 +64,6 @@ namespace TestGame
 
             // TODO: use this.Content to load your game content here
             Textures.Load(this);
-            Map = new TmxMap("Content/Island.tmx");
             pageGame = new PageGame();
         }
 
@@ -68,16 +80,30 @@ namespace TestGame
             // TODO: Add your update logic here
             pageManager.Update(gameTime, this);
 
-            
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
-        {            
-            pageManager.Draw(this);
+        {
+            GraphicsDevice.Clear(Color.Black);
 
+            //Draw gameobjects
+            Drawing._spriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp, transformMatrix: gameCamera.GetViewMatrix());
             base.Draw(gameTime);
+            pageManager.Draw(this);
+            
+            Drawing._spriteBatch.End();
+
+            //Draw UI
+            gameCamera.Zoom = 1f;
+            Drawing._spriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp, transformMatrix: gameCamera.GetViewMatrix());
+            gameCamera.Zoom = pageGame.cam.Zoom;
+
+            pageManager.DrawUI(this);
+
+            Drawing._spriteBatch.End();
+
         }
     }
 }

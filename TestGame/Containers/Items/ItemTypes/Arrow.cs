@@ -14,7 +14,12 @@ namespace TestGame.Containers.Items.ItemTypes
         {
             itemType = ItemType.Arrow;
             this.Damage = Damage;
-            Description = "Damage: " + Damage;
+        }
+        public override List<string> GetDescription()
+        {
+            List<string> newList = new List<string>();
+            newList.Add("Damage: " + Damage);
+            return newList;
         }
     }
 }

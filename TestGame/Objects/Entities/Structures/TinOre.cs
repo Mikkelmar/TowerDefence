@@ -10,7 +10,7 @@ namespace TestGame.Objects.Entities.Structures
 {
     public class TinOre : ResourceBlock
     {
-        public TinOre(int x, int y) : base(x,y, 64, 64)
+        public TinOre(int x, int y) : base(x,y, 32, 32)
         {
             drop = new TinOreItem();
             sprite = new Sprite(Textures.tinOre);

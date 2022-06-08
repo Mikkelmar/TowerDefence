@@ -44,7 +44,7 @@ namespace TestGame.Huds
                 GetPos(g),
                 widthAddmount * size + space * 2,
                 heightAddmount * size + space * 2,
-                depth
+                depth*0.9f
                );
             foreach (ItemSlot itemSlot in slots)
             {
@@ -68,15 +68,15 @@ namespace TestGame.Huds
             {
                 for (int i = 0; i < widthAddmount; i++)
                 {
-                    slots.Add(new ItemSlot(i + (y * widthAddmount), slotContainer, itemPos, depth));
+                    slots.Add(new ItemSlot(i + (y * widthAddmount), slotContainer, itemPos, depth*0.8f));
                     itemPos.X += 64;
                 }
                 itemPos.X = startXpos;
                 itemPos.Y += 64;
             }
-            g.pageGame.mouseManager.Add(this);
-            g.pageGame.mouseManager.AddRight(this);
-            g.pageGame.mouseManager.AddHover(this);
+            g.pageGame.mouseManager.Add(this, true);
+            g.pageGame.mouseManager.AddRight(this, true);
+            g.pageGame.mouseManager.AddHover(this, true);
         }
         public override void Destroy(Game1 g)
         {

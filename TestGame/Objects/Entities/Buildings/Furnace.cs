@@ -20,12 +20,13 @@ namespace TestGame.Objects.Entities.Buildings
         private TimeSpan totalFireTime = new TimeSpan();
         private TimeSpan timeLeft = new TimeSpan(0);
         private readonly TimeSpan smeltingTime = new TimeSpan(0, 0, 6);
-        public Furnace(int x, int y) : base(x, y, 16 * 6, 16 * 6, 5, new Sprite(Textures.spriteSheet_1, new Rectangle(16 * 31, 16 * 13, 32, 32)))
+        public Furnace(int x, int y) : base(x, y, 32, 32, 5, new Sprite(Textures.spriteSheet_1, new Rectangle(16 * 31, 16 * 13, 32, 32)))
         {
             this.solid = true;
             FuelContailer = new SpecializedSlotContainer(1, Item.ItemType.Fuel, 1, 1);
             MeltingContainer = new SpecializedSlotContainer(1, Item.ItemType.Meltable, 1, 1);
             FinishedContainer = new SlotContainer(1, 1, 1);
+           // hitbox = new Rectangle(0, 30, 95, 65);
         }
         public override void Update(GameTime gt, Game1 g)
         {

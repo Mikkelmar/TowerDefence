@@ -35,5 +35,13 @@ namespace TestGame.Managers
         public void Add(Page page, Game1 g) { pages.Add(page); page.Init(g); }
         public void Remove(Page page) { pages.Remove(page); }
         public void Clear() { pages.Clear(); }
+
+        internal void DrawUI(Game1 game1)
+        {
+            if (count > selected)
+            {
+                pages[selected].DrawUI(game1);
+            }
+        }
     }
 }

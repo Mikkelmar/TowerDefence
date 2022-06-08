@@ -25,8 +25,8 @@ namespace TestGame.Objects.Entities.Structures
         }
         protected void Die(Game1 g)
         {
-            g.pageGame.objectManager.Add(new ItemEntity((int)GetPosCenter().X, (int)(Y + Height), drop), g);
-            g.pageGame.objectManager.Remove(this, g);
+            g.pageGame.getObjectManager().Add(new ItemEntity((int)GetPosCenter().X, (int)(Y + Height), drop), g);
+            g.pageGame.getObjectManager().Remove(this, g);
         }
 
         public override void Destroy(Game1 g)

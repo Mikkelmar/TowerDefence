@@ -11,15 +11,17 @@ namespace TestGame.Objects.Entities.Buildings
     public class Chest : Building
     {
         public SlotContainer container;
-        public Chest(int x, int y, int capacity = 8, int Xrow = 4, int Yrow = 2) : base(x, y, 16 * 6, 16 * 6, 5, new Sprite(Textures.spriteSheet_1, new Rectangle(16*29, 16 * 14, 32, 32)))
+        public Chest(int x, int y, int capacity = 8, int Xrow = 4, int Yrow = 2) : base(x, y, 32, 32, 5, new Sprite(Textures.spriteSheet_1, new Rectangle(16*29, 16 * 14, 32, 32)))
         {
             this.solid = true;
             container = new SlotContainer(capacity, Xrow, Yrow);
+            //hitbox = new Rectangle(16, 16, 16, 16);
         }
-        public Chest(int x, int y, SlotContainer container) : base(x, y, 16 * 6, 16 * 6, 5, new Sprite(Textures.spriteSheet_1, new Rectangle(16 * 29, 16 * 14, 32, 32)))
+        public Chest(int x, int y, SlotContainer container) : base(x, y, 32, 32, 5, new Sprite(Textures.spriteSheet_1, new Rectangle(16 * 29, 16 * 14, 32, 32)))
         {
             this.solid = true;
             this.container = container;
+            //hitbox = new Rectangle(16, 16, 16, 16);
         }
         public override void Update(GameTime gt, Game1 g)
         {

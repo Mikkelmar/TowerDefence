@@ -15,14 +15,15 @@ namespace TestGame.Containers.Items.ItemTypes
 {
     public abstract class BowItem : Weapon
     {
-        protected int FireSpeed = 630;
+        protected int FireSpeed;
         protected TimeSpan chargeingTime;
         private bool Chareging = false;
         protected Sprite baseSprite;
-        public BowItem(Sprite sprite, string name, int Damage, int ammount = 1)
-                   : base(sprite, name, Damage, ammount)
+        public BowItem(Sprite sprite, string name, int Damage, int ammount = 1, int FireSpeed = 180, int KnockBack = 70)
+                   : base(sprite, name, Damage, ammount, KnockBack: KnockBack)
         {
             baseSprite = sprite;
+            this.FireSpeed = FireSpeed;
         }
         public Vector2 GetArrowDirection(Vector2 fromPos, Vector2 toPos)
         {
@@ -47,9 +48,9 @@ namespace TestGame.Containers.Items.ItemTypes
             MouseState newState = Mouse.GetState();
             if (newState.LeftButton == ButtonState.Released)
             {
-                Attack(newState.X + g.pageGame.cam.position.X, newState.Y + g.pageGame.cam.position.Y, g);
+                Attack(newState.X + g.gameCamera.Position.X, newState.Y + g.gameCamera.Position.Y, g);
                 Chareging = false;
-                g.pageGame.objectManager.Remove(itemHolding, g);
+                g.pageGame.getObjectManager().Remove(itemHolding, g);
                 itemHolding = null;
                 Sprite = baseSprite;
             }
@@ -88,14 +89,14 @@ namespace TestGame.Containers.Items.ItemTypes
                 direction,
                 caster,
                 arrowItem,
-                (150*getChargeLevel()),
+                Knockback: (KnockBack* getChargeLevel()),
                 DropProjectile: dropArrow
                 );
-            g.pageGame.objectManager.Add(arrow, g);
+            g.pageGame.getObjectManager().Add(arrow, g);
         }
         public virtual void Shoot(ArrowProjectile arrow, Game1 g)
         {
-            g.pageGame.objectManager.Add(arrow, g);
+            g.pageGame.getObjectManager().Add(arrow, g);
         }
         public override bool CanUse(Entity user, Game1 g)
         {
@@ -108,9 +109,9 @@ namespace TestGame.Containers.Items.ItemTypes
             {
                 chargeingTime = new TimeSpan();
                 Chareging = true;
-                ItemAiming itemAiming = new ItemAiming(user, 64, 64, this,
+                ItemAiming itemAiming = new ItemAiming(user, 16, 16, this,
                     (float)((float)(Math.Atan2(y - user.GetPosCenter().Y, x - user.GetPosCenter().X)) - (Math.PI / 3)));
-                g.pageGame.objectManager.Add(itemAiming, g);
+                g.pageGame.getObjectManager().Add(itemAiming, g);
                 itemHolding = itemAiming;
 
             }

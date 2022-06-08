@@ -16,7 +16,12 @@ namespace TestGame.Containers.Items.ItemTypes
         {
             itemType = ItemType.Food;
             this.foodAmmount = foodAmmount;
-            Description = "Restore: " + foodAmmount;
+        }
+        public override List<string> GetDescription()
+        {
+            List<string> newList = new List<string>();
+            newList.Add("Restore: " + foodAmmount);
+            return newList;
         }
         protected virtual bool CanEat(Game1 g)
         {
