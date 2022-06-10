@@ -34,13 +34,13 @@ namespace TestGame.Huds
 
         public override void Draw(Game1 g)
         {
-            Vector2 slotPos = new Vector2((this.X + g.pageGame.cam.position.X + 12), (this.Y + g.pageGame.cam.position.Y + 4));
+            Vector2 slotPos = new Vector2((this.X + g.gameCamera.Position.X + 12), (this.Y + g.gameCamera.Position.Y + 4));
             foreach (Item i in recepie.required.GetItems())
             {
                 i.Draw(slotPos, 64, depth * 0.1f);
                 slotPos.X += 64;
             }
-            Drawing.DrawText("-->",(int)(slotPos.X),(int)(slotPos.Y),(depth * 0.1f));
+            Drawing.DrawText("-->",(int)(slotPos.X+16),(int)(slotPos.Y+20),(depth * 0.1f));
             slotPos.X += 64;
             recepie.creates.Draw(slotPos, 64, depth * 0.1f);
         }

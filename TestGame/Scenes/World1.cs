@@ -29,6 +29,11 @@ namespace TestGame.Scenes
             //init objects
             objectManager.Add(new Door(448, 290, 1, new Microsoft.Xna.Framework.Vector2(128, 95)), g);
 
+
+            objectManager.Add(new Zombie(448, 390), g);
+            objectManager.Add(new Zombie(448, 490), g);
+            objectManager.Add(new ZombieArcher(648, 690), g);
+
             objectManager.Add(new Tree(428 , 328 / 4), g);
             objectManager.Add(new Tree(200, 628 / 4), g);
             objectManager.Add(new Tree(232, 618 / 4), g);
