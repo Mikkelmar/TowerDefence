@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TestGame.Containers;
+using TestGame.Containers.Items;
 using TestGame.Graphics;
 using TestGame.Huds.ActiveHuds;
 
@@ -25,6 +26,17 @@ namespace TestGame.Objects.Entities.Buildings
         }
         public override void Update(GameTime gt, Game1 g)
         {
+        }
+        protected override void Break(Game1 g)
+        {
+            int x = (int)GetPosCenter().X;
+            int y = (int)GetPosCenter().Y;
+            foreach (Item i in container.GetItems())
+            {
+                g.pageGame.getObjectManager().Add(new ItemEntity(x, y, i), g);
+            }
+            g.pageGame.getObjectManager().Add(new ItemEntity(x, y, new Wood()), g);
+            base.Break(g);
         }
 
         protected override void Open(Game1 g)

@@ -21,13 +21,14 @@ namespace TestGame.Pages
         public HudManager hudManager { get; } = new HudManager();
         public MouseManager mouseManager { get; } = new MouseManager();
         public KeyBoardManager keyBoardManager { get; } = new KeyBoardManager();
-
         public Player GetPlayer() { return player; }
         public PageGame() : base(PageID.game) { }
 
 
         public override void Init(Game1 g)
         {
+            //Managers
+            buildHandler = new BuildHandler(g);
 
             //init scenes
             sceneManager.Add(new World1(g), g);
@@ -56,6 +57,7 @@ namespace TestGame.Pages
         {
             
             sceneManager.Draw(g);
+            buildHandler.Draw(g);
 
         }
         public override void DrawUI(Game1 g)

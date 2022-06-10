@@ -12,7 +12,7 @@ namespace TestGame.Objects.Entities.Structures
         protected int hp = 30;
         protected int basehp = 30;
         protected Item drop;
-        public ResourceBlock(int x, int y, int w, int h) : base(x, y, w, h, 401)
+        public ResourceBlock(int x, int y, int w, int h) : base(x, y, w, h, 401, null)
         {}
         public override void TakeDamage(int damage, Game1 g)
         {

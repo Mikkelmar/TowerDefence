@@ -10,7 +10,7 @@ namespace TestGame.Graphics
     {
         public Texture2D Texture { get; private set; }
 
-        private Rectangle? rectangle = null;
+        public Rectangle? rectangle = null; //want to change this to private
 
         public Sprite(Texture2D texture, int x, int y, int width, int height)
         {
@@ -72,7 +72,7 @@ namespace TestGame.Graphics
                     Texture,
                     rect,
                     useBounds,
-                    Color.White,
+                     Color.White,
                     rotation,
                     Vector2.Zero,
                     SpriteEffects.None,
@@ -97,7 +97,7 @@ namespace TestGame.Graphics
                     Texture,
                     new Vector2(x, y),
                     useBounds,
-                    Color.White,
+                     Color.White,
                     rotation,
                     (Vector2)originVecotr,
                     new Vector2(width / ((Rectangle)useBounds).Width, height / ((Rectangle)useBounds).Height),
@@ -111,7 +111,7 @@ namespace TestGame.Graphics
                     Texture,
                     new Vector2(x, y),
                     useBounds,
-                    Color.White,
+                     Color.White,
                     rotation,
                     (Vector2)originVecotr,
                     new Vector2(width / Texture.Width, height / Texture.Height),

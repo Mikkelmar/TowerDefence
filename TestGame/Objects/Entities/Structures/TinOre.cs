@@ -8,17 +8,18 @@ using TestGame.Graphics;
 
 namespace TestGame.Objects.Entities.Structures
 {
-    public class TinOre : ResourceBlock
+    public class TinOre : Ore
     {
-        public TinOre(int x, int y) : base(x,y, 32, 32)
+        public TinOre(int x, int y) : base(x,y)
         {
             drop = new TinOreItem();
             sprite = new Sprite(Textures.tinOre);
         }
-        public override Predicate<Item> CanDestroy()
+        public override void TakeDamage(int damage, Game1 g)
         {
-            return i => i is IronPickaxe;
+            base.TakeDamage(damage, g);
         }
+        
 
     }
 }

@@ -9,7 +9,7 @@ namespace TestGame.Graphics
     {
         public static Texture2D monster, player, spriteSheet_1, inevbar, craftingUI, inevntoryUI, spriteSheet_2,
             slot, selectedSlot, itemContainer, itemContainerTransparent, melting, doneArrow, spriteSheet_3, fireIcon, zombieAcrher,
-            tinOre, copperOre, shadow, armourSheet;
+            tinOre, copperOre, shadow, armourSheet, miningCrack;
         public static SpriteFont font;
         public static void Load(Game1 g)
         {
@@ -34,6 +34,7 @@ namespace TestGame.Graphics
             spriteSheet_2 = g.Content.Load<Texture2D>("sheet");
             spriteSheet_3 = g.Content.Load<Texture2D>("icons");
             armourSheet = g.Content.Load<Texture2D>("armourSheet");
+            miningCrack = g.Content.Load<Texture2D>("miningCrack");
             font = g.Content.Load<SpriteFont>("fonts/boldGame");
         }
     }

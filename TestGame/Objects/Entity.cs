@@ -29,7 +29,7 @@ namespace TestGame.Objects
         public virtual void Move(Vector2 newPos, Game1 g)
         {
             Vector2 nextPos = new Vector2(this.X, this.Y);
-            if (g.pageGame.getObjectManager().CanMove(this, 
+            if (!this.collision || (g.pageGame.getObjectManager().CanMove(this, 
                 new Rectangle(
                     (int)newPos.X + hitbox.X, 
                     (int)this.Y + hitbox.Y, 
@@ -40,11 +40,11 @@ namespace TestGame.Objects
                     (int)newPos.X + hitbox.X,
                     (int)this.Y + hitbox.Y,
                     (int)hitbox.Width,
-                    (int)hitbox.Height))) 
+                    (int)hitbox.Height))))
             {
                 nextPos.X = newPos.X;
             }
-            if ((g.pageGame.getObjectManager().CanMove(this,
+            if (!this.collision || ((g.pageGame.getObjectManager().CanMove(this,
                 new Rectangle(
                     (int)this.X + hitbox.X,
                     (int)newPos.Y + hitbox.Y,
@@ -54,7 +54,7 @@ namespace TestGame.Objects
                     (int)this.X + hitbox.X,
                     (int)newPos.Y + hitbox.Y,
                     (int)hitbox.Width,
-                    (int)hitbox.Height)))
+                    (int)hitbox.Height))))
             {
                 nextPos.Y = newPos.Y;
             }

@@ -56,7 +56,7 @@ namespace TestGame.Scenes
             //Chests
             objectManager.Add(new Chest(100, 300, new SpecializedSlotContainer(5, Item.ItemType.Food, 1, 5)), g);
             Chest largeChest = new Chest(164, 300, 16, 4, 4);
-            ItemContainer ic = new StackContainer(new List<Item> { new Wood(40), new Stone(8), new IronArrow(64), new MultiBow(), new IronSword(), new IronAxe(), new TwoHandSword(), new IronPickaxe(), new FineBow(), new FlintSpear() });
+            ItemContainer ic = new StackContainer(new List<Item> { new TreeSappling(5), new ChestBuild(6), new Wood(40), new Stone(8), new IronArrow(64), new MultiBow(), new IronSword(), new IronAxe(), new TwoHandSword(), new IronPickaxe(), new FineBow(), new FlintSpear() });
             largeChest.container.Add(ic);
             objectManager.Add(largeChest, g);
 

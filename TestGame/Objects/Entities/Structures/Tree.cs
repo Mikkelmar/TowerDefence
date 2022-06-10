@@ -13,16 +13,20 @@ namespace TestGame.Objects.Entities.Structures
     public class Tree : ResourceBlock
     {
         private TimeSpan? shakeTime;
-        private int baseX, baseY;
+        private float baseX, baseY;
         public Tree(int x, int y) : base(x, y, 16*3, 16*4)
         {
             hp = 30;
             basehp = hp;
-            baseX = x;
-            baseY = y;
             sprite = new Sprite(Textures.spriteSheet_1, new Rectangle(24 * 16, 0, 16 * 3, 16 * 4));
             hitbox = new Rectangle(16, 32, 16, 16);
             drop = new Wood(5);
+        }
+        public override void Init(Game1 g)
+        {
+            base.Init(g);
+            baseX = X;
+            baseY = Y;
         }
 
         public override Predicate<Item> CanDestroy()

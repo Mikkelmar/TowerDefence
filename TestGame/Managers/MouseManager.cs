@@ -99,7 +99,7 @@ namespace TestGame.Managers
                 }
             }
         }
-        public static Vector2 GetMousePos()
+        public static Vector2 GetMousePos(bool relative=false)
         {
             MouseState state = Mouse.GetState();
             return new Vector2(state.X, state.Y);

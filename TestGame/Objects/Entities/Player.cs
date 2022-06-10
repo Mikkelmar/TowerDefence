@@ -8,11 +8,12 @@ using TestGame.Containers.Items.ItemTypes;
 using TestGame.Graphics;
 using TestGame.Huds.ActiveHuds;
 using TestGame.Managers;
+using TestGame.Objects.Entities.Buildings;
 using TestGame.Objects.Entities.Creatures;
 
 namespace TestGame.Objects
 {
-    public class Player : Creature, RightClickable, Clickable
+    public class Player : Creature, RightClickable, Clickable, Builder
     {
         public SlotContainer inventory; //{ get { return inventory; } }
         public List<SpecializedSlotContainer> Wearing;
@@ -109,9 +110,21 @@ namespace TestGame.Objects
             }
             if (kb.IsKeyDown(Keys.R))
             {
-                g.pageGame.sceneManager.gotoScene(g, 1);
+                g.pageGame.buildHandler.SetBuild(new Chest(0,0), this);
             }
             setActiveSlot(new List<Keys> { Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8 });
+        }
+        public bool InAction(Game1 g)
+        {
+            if(g.pageGame.hudManager.activeUI != null || g.pageGame.buildHandler.structure != null ){
+                return true;
+            }
+            Item activeItem = inventory.GetItemAtSlot(ActiveSlot);
+            if (activeItem != null && activeItem is Useable && ((Useable)activeItem).IsUsing())
+            {
+                return true;
+            }
+            return false;
         }
         private void setActiveSlot(List<Keys> keys)
         {
@@ -186,11 +199,21 @@ namespace TestGame.Objects
         }
         private void Click(float x, float y, Game1 g, bool isLeftClick)
         {
-            if (inventory.GetItemAtSlot(ActiveSlot) is Containers.Items.ItemTypes.Useable
-                && ((Containers.Items.ItemTypes.Useable)inventory.GetItemAtSlot(ActiveSlot)).UseableOnClick(isLeftClick))
+            if (inventory.GetItemAtSlot(ActiveSlot) is Useable
+                && ((Useable)inventory.GetItemAtSlot(ActiveSlot)).UseableOnClick(isLeftClick))
             {
-                ((Containers.Items.ItemTypes.Useable)inventory.GetItemAtSlot(ActiveSlot)).Activate(this, x, y, g, isLeftClick);
+                ((Useable)inventory.GetItemAtSlot(ActiveSlot)).Activate(this, x, y, g, isLeftClick);
             }
+        }
+
+        public bool CanBuild()
+        {
+            return inventory.Contain(new Wood());
+        }
+
+        public void Built()
+        {
+            inventory.Take(new Wood(), 1);
         }
     }
        

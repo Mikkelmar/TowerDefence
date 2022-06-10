@@ -18,6 +18,7 @@ namespace TestGame.Objects.Entities
         {
             this.item = item;
             haveShadow = true;
+            this.collision = false;
         }
         public override void Update(GameTime gt, Game1 g)
         {

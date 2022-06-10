@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TestGame.Containers.Items;
 using TestGame.Graphics;
 
 namespace TestGame.Objects.Entities.Buildings
@@ -17,6 +18,10 @@ namespace TestGame.Objects.Entities.Buildings
         }
         public override void Update(GameTime gt, Game1 g)
         {
+        }
+        public override Predicate<Item> CanDestroy()
+        {
+            return p => false;
         }
 
         protected override void Open(Game1 g)
