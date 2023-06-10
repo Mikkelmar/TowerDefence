@@ -27,9 +27,9 @@ namespace TestGame.Graphics
             this.rectangle = rectangle;
         }
         //Welcome to overload hell
-        public void Draw(Vector2 pos, float width, float height, float layerDepth = 0.00001f, float rotation = 0.0f, Vector2? origin = null)
+        public void Draw(Vector2 pos, float width, float height, float layerDepth = 0.00001f, float rotation = 0.0f, Vector2? origin = null, float alpha = 1f, SpriteEffects spriteEffects = SpriteEffects.None)
         {
-            Draw(Drawing._spriteBatch, pos.X, pos.Y, width, height, layerDepth, null, rotation, origin);
+            Draw(Drawing._spriteBatch, pos.X, pos.Y, width, height, layerDepth, null, rotation, origin, alpha: alpha, spriteEffects: spriteEffects);
         }
         public void Draw(Vector2 pos, float width, float height, float layerDepth = 0.00001f)
         {
@@ -43,11 +43,15 @@ namespace TestGame.Graphics
         {
             Draw(Drawing._spriteBatch, x, y, size, size, layerDepth, null);
         }
+
         public void Draw(float x, float y, float width, float height, float layerDepth = 0.00001f)
         {
             Draw(Drawing._spriteBatch, x, y, width, height, layerDepth, null);
         }
-
+        public void Draw(Vector2 pos, float layerDepth = 0.00001f, int width = 32, int height=32, float alpha = 1f)
+        {
+            Draw(Drawing._spriteBatch, pos.X, pos.Y, width, height, layerDepth: layerDepth, alpha: alpha);
+        }
         public void Draw(Vector2 pos, float layerDepth = 0.00001f, int scale = 3)
         {
             Draw(Drawing._spriteBatch, pos, layerDepth, null, scale);
@@ -72,14 +76,15 @@ namespace TestGame.Graphics
                     Texture,
                     rect,
                     useBounds,
-                     Color.White,
+                    Color.White,
                     rotation,
                     Vector2.Zero,
                     SpriteEffects.None,
                     layerDepth
                );
         }
-        public void Draw(SpriteBatch spritebatch, float x, float y, float width, float height, float layerDepth = 0.00001f, Rectangle? bounds = null, float rotation = 0.0f, Vector2? origin = null)
+        
+        public void Draw(SpriteBatch spritebatch, float x, float y, float width, float height, float layerDepth = 0.00001f, Rectangle? bounds = null, float rotation = 0.0f, Vector2? origin = null, float alpha = 1f, SpriteEffects spriteEffects = SpriteEffects.None)
         {
             Rectangle? useBounds = rectangle;
             Vector2? originVecotr = origin;
@@ -97,11 +102,11 @@ namespace TestGame.Graphics
                     Texture,
                     new Vector2(x, y),
                     useBounds,
-                     Color.White,
+                    Color.White * alpha,
                     rotation,
                     (Vector2)originVecotr,
                     new Vector2(width / ((Rectangle)useBounds).Width, height / ((Rectangle)useBounds).Height),
-                    SpriteEffects.None,
+                    spriteEffects,
                     layerDepth
                ); ;
             }
@@ -111,11 +116,11 @@ namespace TestGame.Graphics
                     Texture,
                     new Vector2(x, y),
                     useBounds,
-                     Color.White,
+                    Color.White*alpha,
                     rotation,
                     (Vector2)originVecotr,
                     new Vector2(width / Texture.Width, height / Texture.Height),
-                    SpriteEffects.None,
+                    spriteEffects,
                     layerDepth
                ); ;
             }

@@ -22,21 +22,33 @@ namespace TestGame.Objects.Particles
         {
             if (ammount == 0)
             {
-                return 0.2f;
+                return 0.4f;
             }
             if (ammount < 3)
             {
-                return 0.3f;
+                return 0.5f;
             }
             if (ammount < 5)
             {
-                return 0.4f;
+                return 0.6f;
             }
             if (ammount < 8)
             {
-                return 0.5f;
+                return 0.7f;
             }
-            return 0.2f;
+            if (ammount < 15)
+            {
+                return 0.8f;
+            }
+            if (ammount < 20)
+            {
+                return 1f;
+            }
+            if (ammount >= 20)
+            {
+                return 1.2f;
+            }
+            return 0.4f;
         }
         private Color getColor()
         {
@@ -44,17 +56,29 @@ namespace TestGame.Objects.Particles
             {
                 return Color.Gray;
             }
-            if (ammount  < 3)
+            if (ammount  < 5)
             {
                 return Color.White;
             }
-            if (ammount < 5)
+            if (ammount < 7)
             {
                 return Color.Yellow;
             }
-            if (ammount < 8)
+            if (ammount < 10)
+            {
+                return Color.Orange;
+            }
+            if (ammount < 15)
             {
                 return Color.Red;
+            }
+            if (ammount < 20)
+            {
+                return Color.DarkRed;
+            }
+            if (ammount >= 20)
+            {
+                return Color.Purple;
             }
             return Color.Red;
         }

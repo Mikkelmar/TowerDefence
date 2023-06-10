@@ -30,8 +30,9 @@ namespace TestGame.Managers
         public Page GetPage() {
             return pages[selected]; 
         }
-        public virtual void Set(int id) { selected = id; }
-        public virtual void Set(Page page) { selected = page.id; }
+
+        public virtual void Set(int id, Game1 g) { selected = id; pages[selected].Load(g); }
+        public virtual void Set(Page page, Game1 g) { Set(page.id, g); }
         public void Add(Page page, Game1 g) { pages.Add(page); page.Init(g); }
         public void Remove(Page page) { pages.Remove(page); }
         public void Clear() { pages.Clear(); }

@@ -23,9 +23,72 @@
     <None Remove="Content\samplemap.tmx" />
     <None Remove="Content\world2.tmx" />
     <None Remove="Content\world_test.tmx" />
+    <None Remove="Levels\CaveLevel1\paths.txt" />
+    <None Remove="Levels\CaveLevel1\waves.txt" />
+    <None Remove="Levels\CaveLevel2\paths.txt" />
+    <None Remove="Levels\CaveLevel2\waves.txt" />
+    <None Remove="Levels\Level0\paths.txt" />
+    <None Remove="Levels\Level0\waves.txt" />
+    <None Remove="Levels\Level1\paths.txt" />
+    <None Remove="Levels\Level1\waves.txt" />
+    <None Remove="Levels\Level2\paths.txt" />
+    <None Remove="Levels\Level2\waves.txt" />
+    <None Remove="Levels\Level3\paths.txt" />
+    <None Remove="Levels\Level3\waves.txt" />
+    <None Remove="Levels\Level4\paths.txt" />
+    <None Remove="Levels\Level4\waves.txt" />
+    <None Remove="Levels\Level6\paths.txt" />
+    <None Remove="Levels\Level6\waves.txt" />
+    <None Remove="Saves\save1.txt" />
+    <None Remove="Saves\settings.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Island.tmx">
+    <Content Include="Levels\CaveLevel1\waves.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\CaveLevel2\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\CaveLevel2\waves.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level0\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level0\waves.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level1\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level2\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level2\waves.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level3\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level3\waves.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level4\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level4\waves.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level6\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Levels\Level6\waves.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Saves\save1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Saves\settings.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -47,5 +110,21 @@
     <None Update="Content\map2.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Saves\maleNames.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Saves\vikingNames.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Levels\Level1\waves.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Levels\CaveLevel1\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

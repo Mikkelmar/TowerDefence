@@ -3,14 +3,25 @@ using MonoGame.Extended.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TestGame.Objects.Entities.Structures;
+using TestGame.Objects.Monsters;
 
 namespace TestGame.Managers
 {
     public class ObjectManager
     {
         public List<GameObject> gameObjects = new List<GameObject>();
-        
+        public List<Monster> GetMonsters()
+        {
+            List<Monster> monsters = new List<Monster>();
+            foreach(GameObject o in gameObjects)
+            {
+                if(o is Monster)
+                {
+                    monsters.Add((Monster)o);
+                }
+            }
+            return monsters;
+        }
         public void Update(GameTime gt, Game1 g)
         {
             for(var i = 0; i < gameObjects.Count;i++)
@@ -104,6 +115,13 @@ namespace TestGame.Managers
             }
               }
         public void Remove(int index, Game1 g) { gameObjects[index].Destroy(g); gameObjects.Remove(gameObjects[index]);  }
-        public void Clear() { gameObjects.Clear(); }
+        public void Clear(Game1 g) {
+            List<GameObject> obs = new List<GameObject>(gameObjects);
+            foreach (GameObject o in obs)
+            {
+                o.Destroy(g);
+            }
+            gameObjects.Clear(); 
+        }
     }
 }

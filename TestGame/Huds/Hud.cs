@@ -9,10 +9,10 @@ namespace TestGame.Huds
     {
 
         public float X, Y;
-        protected int Width, Height;
+        public int Width, Height;
         public float depth = 0.00000001f;
         public bool rendered = true, visiable = true;
-        protected bool relative = true;
+        protected bool relative = false;
 
         protected Vector2 GetPos(Game1 g)
         {
@@ -42,6 +42,9 @@ namespace TestGame.Huds
         {
 
         }
+        public virtual void Init(Game1 g)
+        { }
+
         public abstract void Draw(Game1 g);
         
             //Drawing.FillRect(GetHitbox(), Color.Red, 0.000000001f, g);

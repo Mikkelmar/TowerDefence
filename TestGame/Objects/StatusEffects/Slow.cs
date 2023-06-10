@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TestGame.Objects.Entities.Creatures;
+using TestGame.Objects.Monsters;
 
 namespace TestGame.Objects.StatusEffects
 {
@@ -14,9 +14,13 @@ namespace TestGame.Objects.StatusEffects
             this.scale = scale;
             Name = "Slow";
         }
-        protected override void TriggerTick(Creature creature, TimeSpan elapsedTime, Game1 g)
+        protected override void TriggerTick(Monster creature, TimeSpan elapsedTime, Game1 g)
         {
             creature.Speed = creature.Speed*scale;
+        }
+        public override StatusEffect clone()
+        {
+            return new Slow(scale, Duration);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TestGame.Managers
         //public Matrix transform { get; private set; }
         public float delay { get; set; } = 3.0f;
         public bool instantCamera = true;
-        public float Zoom = 2f;
+        public float Zoom = 1f;
         public Camera(Vector2 position)
         {
             this.position = position;

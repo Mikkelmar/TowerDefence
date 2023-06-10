@@ -16,30 +16,43 @@ namespace TestGame
     public class Game1 : Game
     {
 
-     
+
 
         // page
         public PageManager pageManager { get; private set; } = new PageManager();
         public PageGame pageGame;
+        public SaveManager saveManager = new SaveManager();
+        public SoundManager soundManager = new SoundManager();
+        public LevelMap levelMap;
         public OrthographicCamera gameCamera;
-
+        public float gameSpeed = 1f;
+        public static bool devMode = true;
         public Game1()
         {
+            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
+            
             //init graphics
             
-            Drawing.Initialize(this);  
-
+            Drawing.Initialize(this);
+            //TargetElapsedTime = System.TimeSpan.FromSeconds(1d / 120d);
+        }
+        public void resetGameTime()
+        {
+            gameSpeed = 1f;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
+            //init camera
+            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, Drawing.WINDOW_WIDTH, Drawing.WINDOW_HEIGHT);
+            gameCamera = new OrthographicCamera(viewportadapter);
+            gameCamera.Zoom = pageGame.cam.Zoom;
 
+            
+            LoadContent();
 
             // window
             IsFixedTimeStep = false;
@@ -47,13 +60,14 @@ namespace TestGame
 
             //init pages
             pageManager.Add(pageGame, this);
-            pageManager.Set(pageGame);
+            pageManager.Add(levelMap, this);
+            //pageManager.Set(pageGame, this);
+            pageManager.Set(levelMap, this);
 
-            //init camera
-            var viewportadapter = new BoxingViewportAdapter(Window, GraphicsDevice, Drawing.WINDOW_WIDTH, Drawing.WINDOW_HEIGHT);
-            gameCamera = new OrthographicCamera(viewportadapter);
-            gameCamera.Zoom = pageGame.cam.Zoom;
-           
+            //load Save
+            saveManager.loadSave(this);
+
+
 
 
 
@@ -64,7 +78,9 @@ namespace TestGame
 
             // TODO: use this.Content to load your game content here
             Textures.Load(this);
+            Sounds.Load(this);
             pageGame = new PageGame();
+            levelMap = new LevelMap();
         }
 
         protected override void Update(GameTime gameTime)
@@ -73,6 +89,8 @@ namespace TestGame
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) // || Keyboard.GetState().IsKeyDown(Keys.Escape)
                 Exit();
+
+            gameTime.ElapsedGameTime *= gameSpeed;
 
             // update drawing
             Drawing.Update(gameTime, this);

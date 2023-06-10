@@ -1,0 +1,12 @@
+GibliGuy
+Crawler
+Rat
+RatHood
+CaveBear
+Slime
+BigSlime
+MegaSlime
+SpawnMonster
+CaveGoblin
+GoblinArmour
+

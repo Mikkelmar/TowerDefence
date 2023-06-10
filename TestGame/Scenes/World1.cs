@@ -3,77 +3,77 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using TestGame.Containers;
-using TestGame.Containers.Items;
-using TestGame.Containers.Items.ItemList;
-using TestGame.Containers.Items.ItemTypes.ItemList;
+using TestGame.Graphics;
 using TestGame.Managers;
-using TestGame.Objects.Entities;
-using TestGame.Objects.Entities.Buildings;
-using TestGame.Objects.Entities.Creatures;
-using TestGame.Objects.Entities.Structures;
-using TiledSharp;
+using TestGame.Objects.Towers;
 
 namespace TestGame.Scenes
 {
     public class World1 : Scene
     {
+        
+
         public World1(Game1 g) : base(g)
         {
-            fileName = "maps/Island";
+            levelData = "Levels/Level1/waves.txt";
+            levelPaths = "Levels/Level1/paths.txt";
+            waveStartMoneyValue = 12;
+            mapWidth = Drawing.WINDOW_WIDTH;
+            background = new Sprite(Textures.map1);
+            name = "Plain fields";
+            levelSong = Sounds.adventure;
+            sceeneID = 0;
         }
 
-        public override void Init(Game1 g)
+        public override List<int> getTowersIDs(Game1 g, int mode)
         {
-            base.Init(g);
-            //init objects
-            objectManager.Add(new Door(448, 290, 1, new Microsoft.Xna.Framework.Vector2(128, 95)), g);
-
-
-            objectManager.Add(new Zombie(448, 390), g);
-            objectManager.Add(new Zombie(448, 490), g);
-            objectManager.Add(new ZombieArcher(648, 690), g);
-
-            objectManager.Add(new Tree(428 , 328 / 4), g);
-            objectManager.Add(new Tree(200, 628 / 4), g);
-            objectManager.Add(new Tree(232, 618 / 4), g);
-            objectManager.Add(new Tree(264, 678 / 4), g);
-            objectManager.Add(new Tree(296, 728 / 4), g);
-
-            objectManager.Add(new CopperOre(1258 / 4, 1128 / 4), g);
-            objectManager.Add(new CopperOre(1458 / 4, 1128 / 4), g);
-            objectManager.Add(new CopperOre(300 / 4, 1000 / 4), g);
-            objectManager.Add(new CopperOre(900 / 4, 1040 / 4), g);
-            objectManager.Add(new CopperOre(270 / 4, 900 / 4), g);
-
-            objectManager.Add(new TinOre(1900 / 4, 2840 / 4), g);
-            objectManager.Add(new TinOre(1270 / 4, 580), g);
-            objectManager.Add(new TinOre(1470 / 4, 500), g);
-
-            objectManager.Add(new ItemEntity(328, 328, new Wood()), g);
-            objectManager.Add(new ItemEntity(368, 328, new Stone()), g);
-            objectManager.Add(new ItemEntity(308, 328, new Apple()), g);
-
-            objectManager.Add(new CraftingTable(164, 228), g);
-            objectManager.Add(new Furnace(100, 228), g);
-            objectManager.Add(new Furnace(132, 228), g);
-
-            //Chests
-            objectManager.Add(new Chest(100, 300, new SpecializedSlotContainer(5, Item.ItemType.Food, 1, 5)), g);
-            Chest largeChest = new Chest(164, 300, 16, 4, 4);
-            ItemContainer ic = new StackContainer(new List<Item> { new TreeSappling(5), new ChestBuild(6), new Wood(40), new Stone(8), new IronArrow(64), new MultiBow(), new IronSword(), new IronAxe(), new TwoHandSword(), new IronPickaxe(), new FineBow(), new FlintSpear() });
-            largeChest.container.Add(ic);
-            objectManager.Add(largeChest, g);
-
-            objectManager.Add(g.pageGame.player, g);
+            if (mode == 0)
+            {
+                return getNormalTowersSelection(g);
+            }
+            else if (mode == 1)
+            {
+                return new List<int>() { 0, 11 };
+            }
+            return getNormalTowersSelection(g);
         }
+
         public override void Load(Game1 g)
         {
             //load scene
             base.Load(g);
+            if(mode == 0)
+            {
+                g.pageGame.player.hp = 20;
+                g.pageGame.player.money = 250;
+            }
+            else if(mode == 1)
+            {
+                g.pageGame.player.hp = 1;
+                g.pageGame.player.money = 400;
+            }
+            else if (mode == 2)
+            {
+                g.pageGame.player.hp = 1;
+                g.pageGame.player.money = 400;
+            }
+            if (Game1.devMode)
+            {
+                g.pageGame.player.money = 400000;
+            }
+
+
+            g.pageGame.getObjectManager().Add(new Plot(445, 226), g);
+            //g.pageGame.getObjectManager().Add(new StartTower(245, 226 - 32), g);
+
+            g.pageGame.getObjectManager().Add(new Plot(893, 226), g);
+            g.pageGame.getObjectManager().Add(new Plot(740, 573), g);
+            g.pageGame.getObjectManager().Add(new Plot(680, 216), g);
+            //g.pageGame.getObjectManager().Add(new Plot(285, 226), g);
+            //g.pageGame.getObjectManager().Add(new Plot(395, 356), g);
+            g.pageGame.getObjectManager().Add(new Plot(909, 432), g);
+            //g.pageGame.getObjectManager().Add(new StartTower(524, 503), g);
         }
-        public override void Close(Game1 g)
-        {
-        }
+
     }
 }

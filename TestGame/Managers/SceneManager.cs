@@ -9,7 +9,7 @@ namespace TestGame.Managers
     public class SceneManager
     {
         public List<Scene> scenes = new List<Scene>();
-        public int selected;
+        public int selected = 0;
 
         public int count { get { return scenes.Count; } }
  
@@ -37,12 +37,12 @@ namespace TestGame.Managers
         }
         public void gotoScene(Game1 g, int id)
         {
-            if(id != selected)
+            if(GetScene() != null)
             {
                 GetScene().Close(g);
-                Set(id);
-                GetScene().Load(g);
             }
+            Set(id);
+            GetScene().Load(g);
             
         }
         public virtual void Set(int id) { selected = id; }
@@ -51,18 +51,5 @@ namespace TestGame.Managers
         public void Remove(Scene scene) { scenes.Remove(scene); }
         public void Clear() { scenes.Clear(); }
         
-        public bool ColideWithTerrein(Rectangle posRect)
-        {
-            TiledMapObjectLayer CollisionLayer = GetScene()._tiledMap.GetLayer<TiledMapObjectLayer>("Collision");
-            foreach (TiledMapObject obj in CollisionLayer.Objects)
-            {
-                if (new Rectangle((int)obj.Position.X, (int)obj.Position.Y, (int)obj.Size.Width, (int)obj.Size.Height).Intersects(posRect))
-                {
-                    return true;
-                }
-            }
-            //return g.Map.Tilesets[0].Tiles[0].Properties["IsCollisionTile"].;
-            return false;
-        }
     }
 }

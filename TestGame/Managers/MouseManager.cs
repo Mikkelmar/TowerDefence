@@ -2,12 +2,16 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using TestGame.Huds;
 
 namespace TestGame.Managers
 {
     public class MouseManager
     {
+        //private string path = "";
         /**
          * 
          * The bool is whether the mouse cords should be relative to the screen og game map
@@ -17,7 +21,27 @@ namespace TestGame.Managers
         private Dictionary<LeftRelease, bool> mouseLeftReleaseLisners = new Dictionary<LeftRelease, bool>();
         private Dictionary<RightClickable, bool> mouseRightClickLisners = new Dictionary<RightClickable, bool>();
         private Dictionary<HoverLisner, bool> hoverLisners = new Dictionary<HoverLisner, bool>();
+        public bool stopClick = false;
+        public Vector2 GetMousePos(Game1 g)
+        {
+            return g.gameCamera.ScreenToWorld(Mouse.GetState().Position.ToVector2());
+        }
+        private List<Clickable> sortedByDepth(List<Clickable> list)
+        {
+            //TODO: Cost effecitve remember sorted list
+            List<Clickable> huds = list.FindAll(e => e is Hud);
+            List<Clickable> objects = list.FindAll(e => e is GameObject);
+            List<Clickable> rest = list.FindAll(e => !(e is GameObject) && !(e is Hud));
 
+            huds = huds.OrderBy(o => (o as Hud).depth).ToList();
+            objects = objects.OrderBy(o => (o as GameObject).depth).ToList();
+
+            List<Clickable> newList = new List<Clickable>();
+            newList.AddRange(huds);
+            newList.AddRange(objects);
+            newList.AddRange(rest);
+            return newList;
+        }
         private MouseState oldState = Mouse.GetState();
         public void Update(GameTime gt, Game1 g)
         {
@@ -28,27 +52,38 @@ namespace TestGame.Managers
             g.gameCamera.Zoom = (g.pageGame.cam.Zoom);
 
             Vector2 _worldPositionZoomed = g.gameCamera.ScreenToWorld(new Vector2(newState.X, newState.Y));
+            
             if (newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
             {
+                stopClick = false;
                 // do something here
-         
+                //Debug.WriteLine((int)_worldPositionZoomed.X+","+ (int)_worldPositionZoomed.Y);
+                //path += (int)_worldPositionZoomed.X + "," + (int)_worldPositionZoomed.Y + "!";
+                //Debug.WriteLine(path);
                 List<Clickable> lisners = new List<Clickable>(mouseLeftClickLisners.Keys);
-                foreach (Clickable lisner in lisners)
+                foreach (Clickable lisner in sortedByDepth(lisners))
                 {
-                    if (mouseLeftClickLisners[lisner])
+                    if (stopClick)
                     {
-                        lisner.Clicked(_worldPosition.X, _worldPosition.Y, g);
+                        break;
                     }
-                    else
-                    {
-                        lisner.Clicked(_worldPositionZoomed.X, _worldPositionZoomed.Y, g);
+                    if (mouseLeftClickLisners.ContainsKey(lisner)){ 
+                        if (mouseLeftClickLisners[lisner])
+                        {
+                            lisner.Clicked(_worldPosition.X, _worldPosition.Y, g);
+                        }
+                        else
+                        {
+                            lisner.Clicked(_worldPositionZoomed.X, _worldPositionZoomed.Y, g);
+                        }
                     }
-                    
+
                 }
             }
             else if (newState.LeftButton == ButtonState.Released && oldState.LeftButton == ButtonState.Pressed)
             {
-
+                //Debug.WriteLine("normal:" + _worldPosition);
+                //Debug.WriteLine(_worldPositionZoomed);
                 List<LeftRelease> lisners = new List<LeftRelease>(mouseLeftReleaseLisners.Keys);
                 foreach (LeftRelease lisner in lisners)
                 {
