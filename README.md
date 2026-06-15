@@ -18,6 +18,7 @@ A 2D tower defence game built in C# with MonoGame. The game has a world map, mul
 <img width="1410" height="947" alt="tower1" src="https://github.com/user-attachments/assets/02379811-898b-4818-b428-b5f1cc8aa193" />
 <img width="966" height="937" alt="4" src="https://github.com/user-attachments/assets/c7e41321-26c7-4be2-9c4b-53f780e671e3" />
 <img width="575" height="528" alt="3" src="https://github.com/user-attachments/assets/4bb8e839-3387-4b18-a7cc-49b47064969b" />
+<img width="1508" height="1008" alt="upgrades" src="https://github.com/user-attachments/assets/fcbf7a0d-6ac6-4f76-90a3-4dd9b2c15ca3" />
 
 ## Controls
 
