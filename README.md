@@ -1,3 +1,4 @@
+<img width="1878" height="1042" alt="2" src="https://github.com/user-attachments/assets/6b295f22-9c9b-4af7-9c77-bbc6e12ba75a" />
 # Tower Defence
 
 A 2D tower defence game built in C# with MonoGame. The game has a world map, multiple hand-authored levels, upgradeable tower paths, hero units, player powers, enemy waves, save progress, music, sound effects, and pixel-art content.
@@ -14,6 +15,9 @@ A 2D tower defence game built in C# with MonoGame. The game has a world map, mul
 - Player powers such as meteor strikes and summoned soldiers, with additional power classes for slow bombs and fire oil.
 - Star upgrades, tower unlocks, enemy discovery, audio settings, fullscreen settings, and save-file persistence.
 - MonoGame content pipeline for sprites, maps, fonts, music, and sound effects.
+<img width="1410" height="947" alt="tower1" src="https://github.com/user-attachments/assets/02379811-898b-4818-b428-b5f1cc8aa193" />
+<img width="966" height="937" alt="4" src="https://github.com/user-attachments/assets/c7e41321-26c7-4be2-9c4b-53f780e671e3" />
+<img width="575" height="528" alt="3" src="https://github.com/user-attachments/assets/4bb8e839-3387-4b18-a7cc-49b47064969b" />
 
 ## Controls
 
